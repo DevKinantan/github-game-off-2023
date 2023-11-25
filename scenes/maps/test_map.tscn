@@ -1,0 +1,248 @@
+[gd_scene load_steps=13 format=3 uid="uid://blwsv4poknga4"]
+
+[ext_resource type="Texture2D" uid="uid://cd4ic6iflwiv5" path="res://assets/tileset/Ground Tileset.png" id="1_l6cj4"]
+[ext_resource type="Script" path="res://scripts/map/TestMap.gd" id="1_lyqwb"]
+[ext_resource type="PackedScene" uid="uid://dhi4opig7i2d8" path="res://scenes/characters/player.tscn" id="2_2r3xb"]
+[ext_resource type="Texture2D" uid="uid://d00l5elvrycir" path="res://assets/tileset/kolam.png" id="3_8cgi1"]
+[ext_resource type="Script" path="res://scripts/interaction/BuildPosition.gd" id="6_5usxx"]
+[ext_resource type="PackedScene" uid="uid://ltlvlsm1w0ha" path="res://scenes/ui/interaction_area.tscn" id="6_hshbp"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_e370y"]
+vertices = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)])
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nj28y"]
+texture = ExtResource("1_l6cj4")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+7:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+4:2/0 = 0
+5:2/0 = 0
+6:2/0 = 0
+7:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+4:3/0 = 0
+5:3/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+1:4/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_e370y")
+2:4/0 = 0
+3:4/0 = 0
+4:4/0 = 0
+5:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+3:5/0 = 0
+4:5/0 = 0
+5:5/0 = 0
+0:6/0 = 0
+1:6/0 = 0
+2:6/0 = 0
+3:6/0 = 0
+4:6/0 = 0
+5:6/0 = 0
+0:7/0 = 0
+1:7/0 = 0
+2:7/0 = 0
+3:7/0 = 0
+4:7/0 = 0
+5:7/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4m42j"]
+texture = ExtResource("3_8cgi1")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+4:2/0 = 0
+5:2/0 = 0
+6:2/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_n4qbt"]
+tile_size = Vector2i(32, 32)
+navigation_layer_0/layers = 1
+sources/0 = SubResource("TileSetAtlasSource_nj28y")
+sources/2 = SubResource("TileSetAtlasSource_4m42j")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2osxn"]
+size = Vector2(70, 24)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_awyqc"]
+radius = 50.0
+
+[node name="TestMap" type="Node2D"]
+script = ExtResource("1_lyqwb")
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_n4qbt")
+format = 2
+layer_0/tile_data = PackedInt32Array(10, 65536, 4, 65546, 65536, 4, 131082, 65536, 4, 196618, 65536, 4, 196619, 196608, 3, 196620, 262144, 3, 196621, 262144, 3, 196622, 262144, 3, 196623, 262144, 3, 327685, 65538, 1, 393221, 65538, 1, 458757, 65538, 2, 458758, 65538, 2, 458759, 65538, 2, 458760, 65538, 2, 458761, 131074, 2, 458762, 65536, 4, 458763, 2, 2, 458764, 65538, 2, 458765, 65538, 2, 458766, 65538, 2, 458767, 65538, 2, 262159, 65538, 0, 327695, 65538, 1, 393231, 65538, 1, 524300, 262144, 5, 589836, 65536, 4, 655372, 65536, 5, 655371, 196608, 3, 655370, 65536, 4, 655369, 327680, 3, 655368, 65536, 5, 655367, 65536, 5, 655366, 65536, 5, 655365, 65536, 5, 655364, 65536, 5, 655363, 65536, 5, 655362, 65536, 5, 655361, 0, 5, 655360, 0, 0, 524299, 196608, 5, 589835, 65536, 4, 393230, 65538, 1, 393222, 65538, 1, 131083, 65536, 4, 524298, 65536, 4, 524297, 327680, 5, 524296, 262144, 5, 524295, 262144, 5, 524294, 262144, 5, 524293, 262144, 5, 524292, 262144, 5, 262158, 65538, 0, 524301, 262144, 5, 524304, 262144, 5, 524302, 262144, 5, 524303, 262144, 5, 458756, 2, 2, 393220, 393218, 1, 327684, 2, 1, 327686, 65538, 1, 327694, 65538, 1, 262154, 65536, 4, 262155, 2, 0, 262156, 65538, 0, 262157, 65538, 0, 393223, 65538, 1, 393224, 65538, 1, 393225, 262146, 0, 393226, 65536, 4, 393227, 393218, 0, 393228, 65538, 1, 393229, 65538, 1, 589834, 65536, 4, 589833, 65536, 4, 589832, 65536, 4, 589831, 65536, 4, 589830, 65536, 4, 589829, 65536, 4, 589828, 65536, 4, 589827, 65536, 4, 589826, 65536, 4, 589825, 0, 4, 589824, 0, 0, 589837, 65536, 4, 655373, 65536, 5, 720908, 0, 0, 720907, 131072, 4, 720906, 65536, 4, 720905, 0, 4, 720904, 0, 0, 720903, 0, 0, 720902, 0, 0, 720901, 0, 0, 720900, 0, 0, 720899, 0, 0, 720898, 0, 0, 720897, 0, 0, 720896, 0, 0, 131084, 65536, 4, 131085, 65536, 4, 131086, 65536, 4, 131087, 65536, 4, 196624, 262144, 3, 262160, 131074, 0, 327696, 131074, 1, 393232, 262146, 1, 458768, 131074, 2, 720909, 0, 0, 131088, 65536, 4, 65547, 196608, 5, 11, 196608, 4, 65545, 327680, 5, 9, 327680, 4, 327687, 65538, 1, 327688, 65538, 1, 327689, 262146, 2, 327690, 65536, 4, 327691, 393218, 2, 327692, 65538, 1, 327693, 65538, 1, 12, 0, 0, 13, 0, 0, 14, 0, 0, 15, 0, 0, 16, 0, 0, 65548, 65536, 3, 65549, 65536, 3, 65550, 65536, 3, 65551, 65536, 3, 65552, 65536, 3, 4, 0, 0, 65540, 65536, 3, 5, 0, 0, 65541, 65536, 3, 6, 0, 0, 65542, 65536, 3, 7, 0, 0, 65543, 65536, 3, 8, 0, 0, 65544, 65536, 3, 589838, 65536, 4, 655374, 65536, 5, 720910, 0, 0, 589839, 65536, 4, 655375, 65536, 5, 720911, 0, 0, 589840, 65536, 4, 655376, 65536, 5, 720912, 0, 0, 0, 0, 0, 65536, 0, 0, 131072, 0, 0, 196608, 0, 0, 262144, 0, 0, 327680, 0, 0, 393216, 0, 0, 458752, 0, 0, 524288, 0, 0, 1, 0, 0, 65537, 0, 3, 327681, 0, 4, 393217, 0, 4, 458753, 0, 4, 524289, 0, 4, 2, 0, 0, 65538, 65536, 3, 327682, 65536, 4, 393218, 65536, 4, 458754, 65536, 4, 524290, 65536, 4, 3, 0, 0, 65539, 65536, 3, 327683, 196608, 4, 393219, 196608, 4, 458755, 196608, 4, 524291, 196608, 5, 17, 0, 0, 65553, 65536, 3, 131089, 65536, 4, 196625, 327680, 3, 262161, 327680, 4, 327697, 327680, 4, 393233, 327680, 4, 18, 0, 0, 65554, 65536, 3, 131090, 65536, 4, 196626, 65536, 4, 262162, 65536, 4, 327698, 65536, 4, 393234, 65536, 4, 19, 0, 0, 65555, 131072, 3, 131091, 131072, 4, 196627, 131072, 4, 262163, 131072, 4, 327699, 131072, 4, 393235, 131072, 4, 20, 0, 0, 65556, 0, 0, 131092, 0, 0, 196628, 0, 0, 262164, 0, 0, 327700, 0, 0, 393236, 0, 0, 21, 0, 0, 65557, 0, 0, 131093, 0, 0, 196629, 0, 0, 262165, 0, 0, 327701, 0, 0, 393237, 0, 0, 458769, 327680, 4, 524305, 327680, 5, 589841, 65536, 4, 655377, 65536, 5, 720913, 0, 0, 458770, 65536, 4, 524306, 65536, 4, 589842, 65536, 4, 655378, 65536, 5, 720914, 0, 0, 458771, 131072, 4, 524307, 131072, 4, 589843, 131072, 4, 655379, 131072, 5, 720915, 0, 0, 458772, 0, 0, 524308, 0, 0, 589844, 0, 0, 655380, 0, 0, 720916, 0, 0, 458773, 0, 0, 524309, 0, 0, 589845, 0, 0, 655381, 0, 0, 720917, 0, 0, 589846, 0, 0, 655382, 0, 0, 720918, 0, 0, 131073, 0, 4, 196609, 0, 4, 262145, 0, 4, 131074, 65536, 4, 196610, 65536, 4, 262146, 65536, 4, 131075, 65536, 4, 196611, 196608, 3, 262147, 196608, 4, 131076, 65536, 4, 196612, 262144, 3, 262148, 2, 0, 131077, 65536, 4, 196613, 262144, 3, 262149, 65538, 0, 131078, 65536, 4, 196614, 262144, 3, 262150, 65538, 0, 131079, 65536, 4, 196615, 262144, 3, 262151, 65538, 0, 131080, 65536, 4, 196616, 262144, 3, 262152, 65538, 0, 131081, 65536, 4, 196617, 327680, 3, 262153, 131074, 0)
+
+[node name="Start" type="Marker2D" parent="."]
+position = Vector2(334, 12)
+
+[node name="Goal" type="Marker2D" parent="."]
+position = Vector2(335, 368)
+
+[node name="Route_1" type="Marker2D" parent="."]
+position = Vector2(77, 190)
+
+[node name="Route_2" type="Marker2D" parent="."]
+position = Vector2(335, 190)
+
+[node name="Route_3" type="Marker2D" parent="."]
+position = Vector2(592, 190)
+
+[node name="Player" parent="." instance=ExtResource("2_2r3xb")]
+position = Vector2(67, 147)
+
+[node name="GoalArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GoalArea"]
+position = Vector2(335, 372)
+shape = SubResource("RectangleShape2D_2osxn")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="BuildPosition" type="Marker2D" parent="."]
+position = Vector2(128, 122)
+script = ExtResource("6_5usxx")
+metadata/_edit_group_ = true
+
+[node name="InteractionArea" parent="BuildPosition" instance=ExtResource("6_hshbp")]
+
+[node name="CollisionShape2D" parent="BuildPosition/InteractionArea" index="0"]
+position = Vector2(0, 0)
+shape = SubResource("CircleShape2D_awyqc")
+
+[node name="Prompt" parent="BuildPosition/InteractionArea" index="1"]
+position = Vector2(0, -24)
+
+[node name="BuildPosition2" type="Marker2D" parent="."]
+position = Vector2(128, 254)
+script = ExtResource("6_5usxx")
+metadata/_edit_group_ = true
+
+[node name="InteractionArea" parent="BuildPosition2" instance=ExtResource("6_hshbp")]
+
+[node name="CollisionShape2D" parent="BuildPosition2/InteractionArea" index="0"]
+position = Vector2(0, 0)
+shape = SubResource("CircleShape2D_awyqc")
+
+[node name="Prompt" parent="BuildPosition2/InteractionArea" index="1"]
+position = Vector2(0, -24)
+
+[node name="BuildPosition3" type="Marker2D" parent="."]
+position = Vector2(290, 254)
+script = ExtResource("6_5usxx")
+metadata/_edit_group_ = true
+
+[node name="InteractionArea" parent="BuildPosition3" instance=ExtResource("6_hshbp")]
+
+[node name="CollisionShape2D" parent="BuildPosition3/InteractionArea" index="0"]
+position = Vector2(0, 0)
+shape = SubResource("CircleShape2D_awyqc")
+
+[node name="Prompt" parent="BuildPosition3/InteractionArea" index="1"]
+position = Vector2(0, -24)
+
+[node name="BuildPosition4" type="Marker2D" parent="."]
+position = Vector2(535, 254)
+script = ExtResource("6_5usxx")
+metadata/_edit_group_ = true
+
+[node name="InteractionArea" parent="BuildPosition4" instance=ExtResource("6_hshbp")]
+
+[node name="CollisionShape2D" parent="BuildPosition4/InteractionArea" index="0"]
+position = Vector2(0, 0)
+shape = SubResource("CircleShape2D_awyqc")
+
+[node name="Prompt" parent="BuildPosition4/InteractionArea" index="1"]
+position = Vector2(0, -24)
+
+[node name="BuildPosition5" type="Marker2D" parent="."]
+position = Vector2(535, 128)
+script = ExtResource("6_5usxx")
+metadata/_edit_group_ = true
+
+[node name="InteractionArea" parent="BuildPosition5" instance=ExtResource("6_hshbp")]
+
+[node name="CollisionShape2D" parent="BuildPosition5/InteractionArea" index="0"]
+position = Vector2(0, 0)
+shape = SubResource("CircleShape2D_awyqc")
+
+[node name="Prompt" parent="BuildPosition5/InteractionArea" index="1"]
+position = Vector2(0, -24)
+
+[node name="BuildPosition6" type="Marker2D" parent="."]
+position = Vector2(379, 128)
+script = ExtResource("6_5usxx")
+metadata/_edit_group_ = true
+
+[node name="InteractionArea" parent="BuildPosition6" instance=ExtResource("6_hshbp")]
+
+[node name="CollisionShape2D" parent="BuildPosition6/InteractionArea" index="0"]
+position = Vector2(0, 0)
+shape = SubResource("CircleShape2D_awyqc")
+
+[node name="Prompt" parent="BuildPosition6/InteractionArea" index="1"]
+position = Vector2(0, -24)
+
+[connection signal="body_entered" from="GoalArea" to="." method="_on_goal_area_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="body_entered" from="BuildPosition/InteractionArea" to="BuildPosition" method="_on_interaction_area_body_entered"]
+[connection signal="body_exited" from="BuildPosition/InteractionArea" to="BuildPosition" method="_on_interaction_area_body_exited"]
+[connection signal="body_entered" from="BuildPosition2/InteractionArea" to="BuildPosition2" method="_on_interaction_area_body_entered"]
+[connection signal="body_exited" from="BuildPosition2/InteractionArea" to="BuildPosition2" method="_on_interaction_area_body_exited"]
+[connection signal="body_entered" from="BuildPosition3/InteractionArea" to="BuildPosition3" method="_on_interaction_area_body_entered"]
+[connection signal="body_exited" from="BuildPosition3/InteractionArea" to="BuildPosition3" method="_on_interaction_area_body_exited"]
+[connection signal="body_entered" from="BuildPosition4/InteractionArea" to="BuildPosition4" method="_on_interaction_area_body_entered"]
+[connection signal="body_exited" from="BuildPosition4/InteractionArea" to="BuildPosition4" method="_on_interaction_area_body_exited"]
+[connection signal="body_entered" from="BuildPosition5/InteractionArea" to="BuildPosition5" method="_on_interaction_area_body_entered"]
+[connection signal="body_exited" from="BuildPosition5/InteractionArea" to="BuildPosition5" method="_on_interaction_area_body_exited"]
+[connection signal="body_entered" from="BuildPosition6/InteractionArea" to="BuildPosition6" method="_on_interaction_area_body_entered"]
+[connection signal="body_exited" from="BuildPosition6/InteractionArea" to="BuildPosition6" method="_on_interaction_area_body_exited"]
+
+[editable path="BuildPosition/InteractionArea"]
+[editable path="BuildPosition2/InteractionArea"]
+[editable path="BuildPosition3/InteractionArea"]
+[editable path="BuildPosition4/InteractionArea"]
+[editable path="BuildPosition5/InteractionArea"]
+[editable path="BuildPosition6/InteractionArea"]

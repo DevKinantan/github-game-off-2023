@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://ltlvlsm1w0ha"]
+
+[ext_resource type="Script" path="res://scripts/interaction/InteractionArea.gd" id="1_cuirt"]
+[ext_resource type="Texture2D" uid="uid://dx0sy7fm00awo" path="res://assets/ui/button_q.png" id="1_xqks4"]
+[ext_resource type="FontFile" path="res://assets/font/easvhs.ttf" id="2_8jlgg"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ga6cj"]
+radius = 11.5
+height = 45.0
+
+[node name="InteractionArea" type="Area2D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_cuirt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 11)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_ga6cj")
+
+[node name="Prompt" type="Sprite2D" parent="."]
+z_index = 50
+position = Vector2(0, -9)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("1_xqks4")
+
+[node name="Label" type="Label" parent="Prompt"]
+anchors_preset = -1
+anchor_left = -1.375
+anchor_top = 1.75
+anchor_right = 2.719
+anchor_bottom = 2.562
+offset_left = 55.6667
+offset_top = -61.0
+offset_right = 55.6587
+offset_bottom = -59.984
+scale = Vector2(0.5, 0.5)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_8jlgg")
+theme_override_font_sizes/font_size = 24
+text = "Interact"
+vertical_alignment = 1

@@ -1,0 +1,139 @@
+[gd_scene load_steps=12 format=3 uid="uid://b1ywqeobuqmpb"]
+
+[ext_resource type="Script" path="res://scripts/class/Character.gd" id="1_ef34a"]
+[ext_resource type="Texture2D" uid="uid://rurlqonp234a" path="res://assets/animation/dwarf/player_idle.png" id="1_kntec"]
+[ext_resource type="Texture2D" uid="uid://dn4lmpqdux32j" path="res://assets/animation/dwarf/player_walking.png" id="2_v2msf"]
+[ext_resource type="PackedScene" uid="uid://ltlvlsm1w0ha" path="res://scenes/ui/interaction_area.tscn" id="3_07liu"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yf80d"]
+radius = 3.0
+height = 12.0
+
+[sub_resource type="Animation" id="Animation_ml6o7"]
+resource_name = "Idle"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/Idle:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_6vmu3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/Idle:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprites/Walk:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_dgsnj"]
+resource_name = "Walk"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/Walk:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4oa33"]
+_data = {
+"Idle": SubResource("Animation_ml6o7"),
+"RESET": SubResource("Animation_6vmu3"),
+"Walk": SubResource("Animation_dgsnj")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nodk3"]
+radius = 13.0
+height = 38.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ffoi3"]
+
+[node name="NPC" type="CharacterBody2D"]
+z_index = 1
+y_sort_enabled = true
+motion_mode = 1
+script = ExtResource("1_ef34a")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_postprocessing = 1
+radius = 30.0
+debug_enabled = true
+
+[node name="NavAgentTimer" type="Timer" parent="."]
+
+[node name="Sprites" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Idle" type="Sprite2D" parent="Sprites"]
+visible = false
+position = Vector2(1, 0)
+texture = ExtResource("1_kntec")
+hframes = 6
+
+[node name="Walk" type="Sprite2D" parent="Sprites"]
+position = Vector2(1, 0)
+texture = ExtResource("2_v2msf")
+hframes = 8
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, 13)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_yf80d")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_4oa33")
+}
+
+[node name="InteractionArea" parent="." instance=ExtResource("3_07liu")]
+
+[node name="CollisionShape2D" parent="InteractionArea" index="0"]
+position = Vector2(0, 13)
+shape = SubResource("CapsuleShape2D_nodk3")
+
+[node name="Prompt" parent="InteractionArea" index="1"]
+position = Vector2(1, -25)
+
+[node name="Hurtbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("CapsuleShape2D_ffoi3")
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
+
+[editable path="InteractionArea"]
