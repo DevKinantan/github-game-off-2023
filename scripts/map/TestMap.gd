@@ -1,7 +1,6 @@
 extends Node2D
 
 
-@onready var npc:Character = $NPC
 
 var enemy_scn = preload("res://scenes/characters/basic_character.tscn")
 

@@ -79,6 +79,42 @@ tracks/4/keys = {
 "method": &"attack_end"
 }]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sprites/Attack/Weapon:flip_h")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Sprites/Attack/Weapon:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(1, -6), Vector2(8, -14), Vector2(-7, -12), Vector2(-12, 4)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Sprites/Attack/Weapon:rotation")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0.436332, 2.35619, 0.785398, -0.436332]
+}
 
 [sub_resource type="Animation" id="Animation_mrwca"]
 resource_name = "AttackRight"
@@ -168,6 +204,18 @@ tracks/6/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [-0.296706, -2.35619, -0.767945, 0.610865]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Sprites/Attack/Weapon:flip_h")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_w2un5"]
@@ -328,6 +376,18 @@ tracks/8/keys = {
 "update": 0,
 "values": [-0.296706]
 }
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Sprites/Attack/Weapon:flip_h")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_dgsnj"]
 resource_name = "Walk"
@@ -389,11 +449,11 @@ texture = ExtResource("3_yrwb1")
 hframes = 6
 
 [node name="Dash" type="Sprite2D" parent="Sprites"]
+visible = false
 texture = ExtResource("4_4q73t")
 hframes = 7
 
 [node name="Attack" type="Node2D" parent="Sprites"]
-visible = false
 
 [node name="AttackBody" type="Sprite2D" parent="Sprites/Attack"]
 texture = ExtResource("5_qr4ek")
@@ -401,7 +461,6 @@ flip_h = true
 hframes = 4
 
 [node name="Weapon" type="Sprite2D" parent="Sprites/Attack"]
-visible = false
 position = Vector2(0, -5)
 rotation = -0.296706
 scale = Vector2(0.1, 0.1)
@@ -427,6 +486,7 @@ libraries = {
 }
 
 [node name="InteractionArea" parent="." instance=ExtResource("4_xd7cw")]
+visible = false
 
 [node name="CollisionShape2D" parent="InteractionArea" index="0"]
 position = Vector2(0, 17)

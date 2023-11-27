@@ -1,81 +1,15 @@
-[gd_scene load_steps=12 format=3 uid="uid://drxoqibmd4kta"]
+[gd_scene load_steps=8 format=3 uid="uid://drxoqibmd4kta"]
 
 [ext_resource type="Script" path="res://scripts/class/Tower.gd" id="1_8ycd5"]
-[ext_resource type="Texture2D" uid="uid://dc1a1iq2vuj8y" path="res://assets/animation/stump/stump_idle.png" id="2_3lvx1"]
-[ext_resource type="Texture2D" uid="uid://tbcrc1kl4v7t" path="res://assets/animation/stump/stump_attacking.png" id="3_lqaau"]
+[ext_resource type="Texture2D" uid="uid://mi4pwjfxbfou" path="res://assets/sprite/tower/TreeTower1.png" id="2_t0eqo"]
 [ext_resource type="PackedScene" uid="uid://ltlvlsm1w0ha" path="res://scenes/ui/interaction_area.tscn" id="4_hvxt0"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yf80d"]
-radius = 3.0
-height = 12.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_namor"]
+radius = 7.0
+height = 32.0
 
-[sub_resource type="Animation" id="Animation_ml6o7"]
-resource_name = "Idle"
-length = 0.4
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprites/Idle:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3]
-}
-
-[sub_resource type="Animation" id="Animation_6vmu3"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprites/Idle:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprites/Walk:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
-[sub_resource type="Animation" id="Animation_dgsnj"]
-resource_name = "Walk"
-length = 0.4
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprites/Walk:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_4oa33"]
-_data = {
-"Idle": SubResource("Animation_ml6o7"),
-"RESET": SubResource("Animation_6vmu3"),
-"Walk": SubResource("Animation_dgsnj")
-}
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rpe8h"]
+size = Vector2(39, 50)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nodk3"]
 radius = 13.0
@@ -84,48 +18,35 @@ height = 38.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_a3eq7"]
 radius = 70.0
 
-[node name="Tower" type="CharacterBody2D"]
+[node name="BasicTower" type="StaticBody2D"]
 z_index = 1
 y_sort_enabled = true
-motion_mode = 1
+input_pickable = true
 script = ExtResource("1_8ycd5")
-default_speed = 0.0
 
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-path_postprocessing = 1
-radius = 30.0
-debug_enabled = true
-
-[node name="NavAgentTimer" type="Timer" parent="."]
-
-[node name="Sprites" type="Node2D" parent="."]
-y_sort_enabled = true
-
-[node name="Idle" type="Sprite2D" parent="Sprites"]
+[node name="FocusLine" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(1, 0)
-texture = ExtResource("2_3lvx1")
-hframes = 4
+modulate = Color(100, 100, 97.66, 1)
+position = Vector2(0, -13)
+scale = Vector2(1.05, 1.05)
+texture = ExtResource("2_t0eqo")
 
-[node name="Walk" type="Sprite2D" parent="Sprites"]
-visible = false
-position = Vector2(1, 0)
-texture = ExtResource("2_3lvx1")
-hframes = 4
-
-[node name="Attack" type="Sprite2D" parent="Sprites"]
-texture = ExtResource("3_lqaau")
-hframes = 7
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -13)
+texture = ExtResource("2_t0eqo")
 
 [node name="Collision" type="CollisionShape2D" parent="."]
-position = Vector2(0, 13)
+position = Vector2(0, 6)
 rotation = 1.5708
-shape = SubResource("CapsuleShape2D_yf80d")
+shape = SubResource("CapsuleShape2D_namor")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_4oa33")
-}
+[node name="MouseDetector" type="Area2D" parent="."]
+
+[node name="Collision2D" type="CollisionShape2D" parent="MouseDetector"]
+light_mask = 4
+visibility_layer = 4
+position = Vector2(-0.5, -12)
+shape = SubResource("RectangleShape2D_rpe8h")
 
 [node name="InteractionArea" parent="." instance=ExtResource("4_hvxt0")]
 
@@ -148,6 +69,8 @@ autostart = true
 [node name="Cooldown" type="Timer" parent="."]
 one_shot = true
 
+[connection signal="mouse_entered" from="MouseDetector" to="." method="_on_mouse_detector_mouse_entered"]
+[connection signal="mouse_exited" from="MouseDetector" to="." method="_on_mouse_detector_mouse_exited"]
 [connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
 [connection signal="timeout" from="RefreshTarget" to="." method="_on_refresh_target_timeout"]
 [connection signal="timeout" from="Cooldown" to="." method="_on_cooldown_timeout"]

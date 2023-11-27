@@ -175,6 +175,6 @@ func unfollow_target(t:Node2D):
 
 func _on_hurtbox_area_entered(area):
 	if area.name == "Hitbox":
-		hp -= 1
+		hp -= 0
 		if hp <= 0:
 			queue_free()

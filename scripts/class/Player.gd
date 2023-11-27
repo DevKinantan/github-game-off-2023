@@ -32,7 +32,7 @@ func _input(event):
 		direction = Vector2(Input.get_axis("ui_left", "ui_right"), Input.get_axis("ui_up", "ui_down"))
 		direction = direction.normalized()
 		
-		if event.is_action_pressed("dash") and direction.x != 0:
+		if event.is_action_pressed("dash") and direction != Vector2.ZERO:
 			dash_state()
 		
 		elif event.is_action_pressed("attack"):
