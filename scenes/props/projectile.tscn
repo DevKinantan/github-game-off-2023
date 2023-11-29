@@ -1,17 +1,18 @@
 [gd_scene load_steps=4 format=3 uid="uid://0d13swxig117"]
 
 [ext_resource type="Script" path="res://scripts/class/Projectile.gd" id="1_k5umu"]
-[ext_resource type="Texture2D" uid="uid://dg826hjaiuo0" path="res://assets/animation/projectile/stump_projectile.png" id="1_mxnnq"]
+[ext_resource type="Texture2D" uid="uid://dh27bx1yqncdr" path="res://assets/sprite/bullet.png" id="2_y2h0e"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_n2aeu"]
 radius = 5.0
 
 [node name="Projectile" type="CharacterBody2D"]
+z_index = 2
 script = ExtResource("1_k5umu")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_mxnnq")
-hframes = 4
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_y2h0e")
 
 [node name="Hitbox" type="Area2D" parent="."]
 

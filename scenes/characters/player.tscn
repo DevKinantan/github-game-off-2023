@@ -1,14 +1,13 @@
-[gd_scene load_steps=19 format=3 uid="uid://dhi4opig7i2d8"]
+[gd_scene load_steps=24 format=3 uid="uid://dhi4opig7i2d8"]
 
 [ext_resource type="Script" path="res://scripts/class/Player.gd" id="1_d43cp"]
 [ext_resource type="Texture2D" uid="uid://cm7ou0sjwf33d" path="res://assets/animation/player/player_idle.png" id="2_f7ixp"]
 [ext_resource type="Texture2D" uid="uid://drj0rirp83sd8" path="res://assets/animation/player/player_walk.png" id="3_yrwb1"]
 [ext_resource type="Texture2D" uid="uid://di2hwmhstyu1x" path="res://assets/animation/player/player_dash.png" id="4_4q73t"]
-[ext_resource type="PackedScene" uid="uid://ltlvlsm1w0ha" path="res://scenes/ui/interaction_area.tscn" id="4_xd7cw"]
 [ext_resource type="Texture2D" uid="uid://c0v6ypitlr3yh" path="res://assets/animation/player/player_attack_part1.png" id="5_qr4ek"]
 [ext_resource type="Texture2D" uid="uid://0c2hqdt7eifb" path="res://assets/sprite/BayanganPlayer.png" id="5_t2tx8"]
 [ext_resource type="Texture2D" uid="uid://cec4o76l7nty5" path="res://assets/animation/player/player_attack_part2.png" id="6_n3tsc"]
-[ext_resource type="Texture2D" uid="uid://t1e7ox1q457j" path="res://assets/sprite/weapon/icon_sword.png" id="6_x4ykj"]
+[ext_resource type="Texture2D" uid="uid://ds2if8bqec0ov" path="res://assets/sprite/weapon/axe_tool.png" id="7_8kdf3"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yf80d"]
 radius = 4.0
@@ -101,7 +100,7 @@ tracks/6/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [Vector2(1, -6), Vector2(8, -14), Vector2(-7, -12), Vector2(-12, 4)]
+"values": [Vector2(1, -26), Vector2(8, -35), Vector2(-7, -32), Vector2(-12, -15)]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
@@ -191,7 +190,7 @@ tracks/5/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [Vector2(0, -5), Vector2(-8, -14), Vector2(7, -11), Vector2(12, 7)]
+"values": [Vector2(0, -25), Vector2(-8, -35), Vector2(7, -32), Vector2(12, -13)]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -216,6 +215,35 @@ tracks/7/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Hitbox/CollisionShape2D:disabled")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+
+[sub_resource type="Animation" id="Animation_n6afm"]
+resource_name = "Damaged"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(10, 1, 1, 1), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_w2un5"]
@@ -388,6 +416,30 @@ tracks/9/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Sprites:modulate")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(10, 1, 1, 1)]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Hitbox/CollisionShape2D:disabled")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_dgsnj"]
 resource_name = "Walk"
@@ -410,23 +462,68 @@ tracks/0/keys = {
 _data = {
 "AttackLeft": SubResource("Animation_ovwta"),
 "AttackRight": SubResource("Animation_mrwca"),
+"Damaged": SubResource("Animation_n6afm"),
 "Dash": SubResource("Animation_w2un5"),
 "Idle": SubResource("Animation_ml6o7"),
 "RESET": SubResource("Animation_6vmu3"),
 "Walk": SubResource("Animation_dgsnj")
 }
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nodk3"]
-radius = 17.0
-height = 52.0
+[sub_resource type="Animation" id="Animation_q6o76"]
+resource_name = "Damaged"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(10, 1, 1, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_u5rsn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qwwvq"]
+_data = {
+"Damaged": SubResource("Animation_q6o76"),
+"RESET": SubResource("Animation_u5rsn")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ccop2"]
+height = 38.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ng7cj"]
+radius = 37.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0crtq"]
+radius = 8.0
+height = 26.0
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 1
-y_sort_enabled = true
 collision_layer = 3
 collision_mask = 3
 motion_mode = 1
 script = ExtResource("1_d43cp")
+default_speed = 200.0
 sprite_offset = 3
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
@@ -435,48 +532,52 @@ debug_enabled = true
 
 [node name="NavAgentTimer" type="Timer" parent="."]
 
+[node name="Shadow" type="Sprite2D" parent="."]
+texture = ExtResource("5_t2tx8")
+offset = Vector2(0, 4)
+
 [node name="Sprites" type="Node2D" parent="."]
 y_sort_enabled = true
 
 [node name="Idle" type="Sprite2D" parent="Sprites"]
 visible = false
 texture = ExtResource("2_f7ixp")
+offset = Vector2(0, -20)
 hframes = 4
 
 [node name="Walk" type="Sprite2D" parent="Sprites"]
 visible = false
 texture = ExtResource("3_yrwb1")
+offset = Vector2(0, -20)
 hframes = 6
 
 [node name="Dash" type="Sprite2D" parent="Sprites"]
-visible = false
 texture = ExtResource("4_4q73t")
+offset = Vector2(0, -20)
 hframes = 7
 
 [node name="Attack" type="Node2D" parent="Sprites"]
+visible = false
 
 [node name="AttackBody" type="Sprite2D" parent="Sprites/Attack"]
 texture = ExtResource("5_qr4ek")
+offset = Vector2(0, -20)
 flip_h = true
 hframes = 4
 
 [node name="Weapon" type="Sprite2D" parent="Sprites/Attack"]
 position = Vector2(0, -5)
 rotation = -0.296706
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("6_x4ykj")
+texture = ExtResource("7_8kdf3")
 
 [node name="AttackHand" type="Sprite2D" parent="Sprites/Attack"]
 texture = ExtResource("6_n3tsc")
+offset = Vector2(0, -20)
 flip_h = true
 hframes = 4
 
-[node name="Shadow" type="Sprite2D" parent="."]
-position = Vector2(0, 24)
-texture = ExtResource("5_t2tx8")
-
 [node name="Collision" type="CollisionShape2D" parent="."]
-position = Vector2(0, 21)
+position = Vector2(0, 2)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_yf80d")
 
@@ -485,14 +586,29 @@ libraries = {
 "": SubResource("AnimationLibrary_4oa33")
 }
 
-[node name="InteractionArea" parent="." instance=ExtResource("4_xd7cw")]
+[node name="TintEffect" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_qwwvq")
+}
+
+[node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(27, -13)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CapsuleShape2D_ccop2")
+
+[node name="ObserveArea" type="Area2D" parent="."]
 visible = false
 
-[node name="CollisionShape2D" parent="InteractionArea" index="0"]
-position = Vector2(0, 17)
-shape = SubResource("CapsuleShape2D_nodk3")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ObserveArea"]
+shape = SubResource("CircleShape2D_ng7cj")
 
-[node name="Prompt" parent="InteractionArea" index="1"]
-position = Vector2(0, -35)
+[node name="Hurtbox" type="Area2D" parent="."]
+position = Vector2(0, -15)
+metadata/_edit_group_ = true
 
-[editable path="InteractionArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("CapsuleShape2D_0crtq")
+
+[connection signal="area_entered" from="ObserveArea" to="." method="_on_observe_area_area_entered"]
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]

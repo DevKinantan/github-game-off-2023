@@ -1,6 +1,5 @@
 class_name Character extends CharacterBody2D
 
-
 signal hp_changed(percentage)
 signal assignment_done(character, assignment)
 
@@ -21,6 +20,7 @@ const DIR_VECTOR = {
 @export var default_speed:float = 100
 @export var max_hp:int = 5
 @export var sprite_offset = 0
+@export var invincible:bool = false
 
 var shadow:Sprite2D = null
 
@@ -174,7 +174,7 @@ func unfollow_target(t:Node2D):
 
 
 func _on_hurtbox_area_entered(area):
-	if area.name == "Hitbox":
-		hp -= 0
+	if area.name == "Hitbox" and not invincible:
+		$TintEffect.play("Damaged")
 		if hp <= 0:
 			queue_free()

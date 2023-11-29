@@ -10,11 +10,10 @@ const RED_COLOR = Color(1.0, 0.0, 0.0, 0.5)
 const TOWERS = [
 	{
 		"sprite": preload("res://assets/sprite/tower/TreeTower1.png"),
-		"scene": preload("res://scenes/characters/basic_tower.tscn")
+		"scene": preload("res://scenes/towers/basic_tower.tscn")
 	}
 ]
 
-var foo = preload("res://scenes/characters/basic_tower.tscn")
 
 @export var max_distance = 100.0
 

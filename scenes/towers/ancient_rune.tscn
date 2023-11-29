@@ -1,61 +1,54 @@
-[gd_scene load_steps=8 format=3 uid="uid://drxoqibmd4kta"]
+[gd_scene load_steps=7 format=3 uid="uid://bx1vqr61hxiud"]
 
-[ext_resource type="Script" path="res://scripts/class/Tower.gd" id="1_8ycd5"]
-[ext_resource type="Texture2D" uid="uid://mi4pwjfxbfou" path="res://assets/sprite/tower/TreeTower1.png" id="2_t0eqo"]
-[ext_resource type="PackedScene" uid="uid://ltlvlsm1w0ha" path="res://scenes/ui/interaction_area.tscn" id="4_hvxt0"]
+[ext_resource type="Script" path="res://scripts/class/Tower.gd" id="1_igjub"]
+[ext_resource type="Texture2D" uid="uid://bu6tqtc2i2r13" path="res://assets/sprite/tower/TreeMainObjective.png" id="2_e733i"]
+[ext_resource type="Texture2D" uid="uid://clvwe7fr4375g" path="res://assets/sprite/circle.png" id="2_ssltq"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_namor"]
-radius = 7.0
-height = 32.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p8blx"]
+radius = 20.0
+height = 90.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_rpe8h"]
-size = Vector2(39, 50)
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nodk3"]
-radius = 13.0
-height = 38.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gjp0d"]
+size = Vector2(93, 159)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_a3eq7"]
-radius = 70.0
+radius = 100.0
 
 [node name="BasicTower" type="StaticBody2D"]
 z_index = 1
-y_sort_enabled = true
 input_pickable = true
-script = ExtResource("1_8ycd5")
+script = ExtResource("1_igjub")
+can_attack = false
+attack_radius = 0
+
+[node name="RadiusIndicator" type="Sprite2D" parent="."]
+self_modulate = Color(0.392157, 1, 1, 0.333333)
+texture = ExtResource("2_ssltq")
 
 [node name="FocusLine" type="Sprite2D" parent="."]
-visible = false
 modulate = Color(100, 100, 97.66, 1)
 position = Vector2(0, -13)
 scale = Vector2(1.05, 1.05)
-texture = ExtResource("2_t0eqo")
+texture = ExtResource("2_e733i")
+offset = Vector2(0, -47)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -13)
-texture = ExtResource("2_t0eqo")
+texture = ExtResource("2_e733i")
+offset = Vector2(0, -50)
 
 [node name="Collision" type="CollisionShape2D" parent="."]
-position = Vector2(0, 6)
+position = Vector2(-5, -6)
 rotation = 1.5708
-shape = SubResource("CapsuleShape2D_namor")
+shape = SubResource("CapsuleShape2D_p8blx")
 
 [node name="MouseDetector" type="Area2D" parent="."]
 
 [node name="Collision2D" type="CollisionShape2D" parent="MouseDetector"]
 light_mask = 4
 visibility_layer = 4
-position = Vector2(-0.5, -12)
-shape = SubResource("RectangleShape2D_rpe8h")
-
-[node name="InteractionArea" parent="." instance=ExtResource("4_hvxt0")]
-
-[node name="CollisionShape2D" parent="InteractionArea" index="0"]
-position = Vector2(0, 13)
-shape = SubResource("CapsuleShape2D_nodk3")
-
-[node name="Prompt" parent="InteractionArea" index="1"]
-position = Vector2(1, -25)
+position = Vector2(-4.5, -62.5)
+shape = SubResource("RectangleShape2D_gjp0d")
 
 [node name="AttackArea" type="Area2D" parent="."]
 
@@ -74,5 +67,3 @@ one_shot = true
 [connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
 [connection signal="timeout" from="RefreshTarget" to="." method="_on_refresh_target_timeout"]
 [connection signal="timeout" from="Cooldown" to="." method="_on_cooldown_timeout"]
-
-[editable path="InteractionArea"]

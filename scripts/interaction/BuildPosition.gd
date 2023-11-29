@@ -1,6 +1,6 @@
 extends Marker2D
 
-var tower_scn = preload("res://scenes/characters/basic_tower.tscn")
+var tower_scn = preload("res://scenes/towers/basic_tower.tscn")
 
 var can_build = true
 var player_in_area = false

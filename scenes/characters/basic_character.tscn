@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b1ywqeobuqmpb"]
+[gd_scene load_steps=16 format=3 uid="uid://b1ywqeobuqmpb"]
 
 [ext_resource type="Script" path="res://scripts/class/Character.gd" id="1_ef34a"]
 [ext_resource type="Texture2D" uid="uid://rurlqonp234a" path="res://assets/animation/dwarf/player_idle.png" id="1_kntec"]
@@ -8,6 +8,23 @@
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yf80d"]
 radius = 3.0
 height = 12.0
+
+[sub_resource type="Animation" id="Animation_f67qs"]
+resource_name = "Damaged"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(10, 1, 1, 1), Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_ml6o7"]
 resource_name = "Idle"
@@ -52,6 +69,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprites:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_dgsnj"]
 resource_name = "Walk"
@@ -72,9 +101,48 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4oa33"]
 _data = {
+"Damaged": SubResource("Animation_f67qs"),
 "Idle": SubResource("Animation_ml6o7"),
 "RESET": SubResource("Animation_6vmu3"),
 "Walk": SubResource("Animation_dgsnj")
+}
+
+[sub_resource type="Animation" id="Animation_q6o76"]
+resource_name = "Damaged"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(10, 1, 1, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_u5rsn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qwwvq"]
+_data = {
+"Damaged": SubResource("Animation_q6o76"),
+"RESET": SubResource("Animation_u5rsn")
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nodk3"]
@@ -101,12 +169,13 @@ debug_enabled = true
 y_sort_enabled = true
 
 [node name="Idle" type="Sprite2D" parent="Sprites"]
-visible = false
+self_modulate = Color(0.188235, 0.988235, 0, 1)
 position = Vector2(1, 0)
 texture = ExtResource("1_kntec")
 hframes = 6
 
 [node name="Walk" type="Sprite2D" parent="Sprites"]
+visible = false
 position = Vector2(1, 0)
 texture = ExtResource("2_v2msf")
 hframes = 8
@@ -121,7 +190,13 @@ libraries = {
 "": SubResource("AnimationLibrary_4oa33")
 }
 
+[node name="TintEffect" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_qwwvq")
+}
+
 [node name="InteractionArea" parent="." instance=ExtResource("3_07liu")]
+visible = false
 
 [node name="CollisionShape2D" parent="InteractionArea" index="0"]
 position = Vector2(0, 13)
@@ -131,6 +206,7 @@ shape = SubResource("CapsuleShape2D_nodk3")
 position = Vector2(1, -25)
 
 [node name="Hurtbox" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 shape = SubResource("CapsuleShape2D_ffoi3")

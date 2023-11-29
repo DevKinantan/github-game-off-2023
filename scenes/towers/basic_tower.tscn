@@ -1,0 +1,68 @@
+[gd_scene load_steps=7 format=3 uid="uid://drxoqibmd4kta"]
+
+[ext_resource type="Script" path="res://scripts/class/Tower.gd" id="1_r2cly"]
+[ext_resource type="Texture2D" uid="uid://clvwe7fr4375g" path="res://assets/sprite/circle.png" id="2_lqoum"]
+[ext_resource type="Texture2D" uid="uid://mi4pwjfxbfou" path="res://assets/sprite/tower/TreeTower1.png" id="2_y7yxp"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_namor"]
+radius = 7.0
+height = 32.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rpe8h"]
+size = Vector2(39, 50)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a3eq7"]
+radius = 70.0
+
+[node name="BasicTower" type="StaticBody2D"]
+z_index = 1
+y_sort_enabled = true
+input_pickable = true
+script = ExtResource("1_r2cly")
+
+[node name="RadiusIndicator" type="Sprite2D" parent="."]
+self_modulate = Color(0.392157, 1, 1, 0.333333)
+scale = Vector2(2, 2)
+texture = ExtResource("2_lqoum")
+
+[node name="FocusLine" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(100, 100, 97.66, 1)
+position = Vector2(0, -13)
+scale = Vector2(1.05, 1.05)
+texture = ExtResource("2_y7yxp")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -13)
+texture = ExtResource("2_y7yxp")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, 6)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_namor")
+
+[node name="MouseDetector" type="Area2D" parent="."]
+
+[node name="Collision2D" type="CollisionShape2D" parent="MouseDetector"]
+light_mask = 4
+visibility_layer = 4
+position = Vector2(-0.5, -12)
+shape = SubResource("RectangleShape2D_rpe8h")
+
+[node name="AttackArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+shape = SubResource("CircleShape2D_a3eq7")
+
+[node name="RefreshTarget" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[node name="Cooldown" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="mouse_entered" from="MouseDetector" to="." method="_on_mouse_detector_mouse_entered"]
+[connection signal="mouse_exited" from="MouseDetector" to="." method="_on_mouse_detector_mouse_exited"]
+[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
+[connection signal="timeout" from="RefreshTarget" to="." method="_on_refresh_target_timeout"]
+[connection signal="timeout" from="Cooldown" to="." method="_on_cooldown_timeout"]

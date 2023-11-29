@@ -6,10 +6,13 @@ enum {
 	ATTACK
 }
 
+var tool = "axe"
+
 
 func _ready():
 	super()
 	speed = default_speed
+	set_tool("pickaxe")
 
 
 func _physics_process(_delta):
@@ -43,6 +46,15 @@ func _input(event):
 		speed = default_speed
 
 
+func set_tool(t):
+	tool = t
+	match tool:
+		"axe":
+			$Sprites/Attack/Weapon.texture = load("res://assets/sprite/weapon/axe_tool.png")
+		"pickaxe":
+			$Sprites/Attack/Weapon.texture = load("res://assets/sprite/weapon/pickaxe_tool.png")
+
+
 func attack_state():
 	state = ATTACK
 	direction = Vector2.ZERO
@@ -58,7 +70,7 @@ func attack_end():
 
 func dash_state():
 	state = DASH
-	speed *= 2.0
+#	speed *= 2.0
 	velocity = direction * speed
 	show_sprite("Dash")
 	$AnimationPlayer.play("Dash")
@@ -67,3 +79,12 @@ func dash_state():
 func dash_end():
 	direction = Vector2.ZERO
 	state = MOVE
+
+
+func _on_observe_area_area_entered(area):
+	if area.get_parent() is Resources:
+		match area.get_parent().resource_type:
+			Resources.RESOURCE.WOOD:
+				set_tool("axe")
+			Resources.RESOURCE.ROCK:
+				set_tool("pickaxe")
