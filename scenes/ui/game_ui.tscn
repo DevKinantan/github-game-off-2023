@@ -1,0 +1,51 @@
+[gd_scene load_steps=6 format=3 uid="uid://dk03trosymu10"]
+
+[ext_resource type="Script" path="res://scripts/ui/GameUI.gd" id="1_jq6bd"]
+[ext_resource type="PackedScene" uid="uid://c2n7wwhulhg67" path="res://scenes/ui/resource_bar.tscn" id="2_v3mxo"]
+[ext_resource type="PackedScene" uid="uid://bt43xp3nu87v1" path="res://scenes/ui/tower_selector.tscn" id="3_jphav"]
+[ext_resource type="Texture2D" uid="uid://53niy0sjatlp" path="res://assets/ui/ui_setting.png" id="4_j7eir"]
+[ext_resource type="FontFile" uid="uid://dyolax51351il" path="res://assets/font/PixelifySans-VariableFont_wght.ttf" id="5_gbsmk"]
+
+[node name="GameUI" type="CanvasLayer"]
+script = ExtResource("1_jq6bd")
+
+[node name="ResourceBar" parent="." instance=ExtResource("2_v3mxo")]
+
+[node name="TowerSelector" parent="." instance=ExtResource("3_jphav")]
+
+[node name="Pause" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PauseIcon" type="TextureRect" parent="Pause"]
+layout_mode = 0
+offset_left = 590.0
+offset_top = 19.0
+offset_right = 630.0
+offset_bottom = 59.0
+texture = ExtResource("4_j7eir")
+
+[node name="Exp" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="Exp"]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 9.0
+
+[node name="Label" type="Label" parent="Exp"]
+layout_mode = 0
+offset_top = -3.0
+offset_right = 640.0
+offset_bottom = 13.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("5_gbsmk")
+theme_override_font_sizes/font_size = 10
+text = "lv 1"
+horizontal_alignment = 1
+vertical_alignment = 1

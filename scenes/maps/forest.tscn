@@ -1,6 +1,7 @@
-[gd_scene load_steps=19 format=3 uid="uid://l8lhu14oigku"]
+[gd_scene load_steps=23 format=3 uid="uid://l8lhu14oigku"]
 
 [ext_resource type="Texture2D" uid="uid://88wpftgvk7c5" path="res://assets/tileset/cliff.png" id="1_elrub"]
+[ext_resource type="Script" path="res://scripts/map/Forest.gd" id="1_o7g5c"]
 [ext_resource type="Texture2D" uid="uid://wfwuv13vr570" path="res://assets/tileset/decor.png" id="2_mexlv"]
 [ext_resource type="Texture2D" uid="uid://chs8w67ork4f5" path="res://assets/tileset/grass.png" id="3_7lr51"]
 [ext_resource type="Texture2D" uid="uid://d1prhbpo82314" path="res://assets/tileset/lake.png" id="4_jupmt"]
@@ -8,8 +9,10 @@
 [ext_resource type="PackedScene" uid="uid://dhi4opig7i2d8" path="res://scenes/characters/player.tscn" id="6_uhmqd"]
 [ext_resource type="PackedScene" uid="uid://2cmr8321wh8y" path="res://scenes/towers/ancient_tower.tscn" id="7_8l24o"]
 [ext_resource type="Script" path="res://scripts/interaction/TowerPlacement.gd" id="7_dfp3h"]
+[ext_resource type="PackedScene" uid="uid://dk03trosymu10" path="res://scenes/ui/game_ui.tscn" id="7_yxqgu"]
 [ext_resource type="Texture2D" uid="uid://mi4pwjfxbfou" path="res://assets/sprite/tower/TreeTower1.png" id="8_yj4sm"]
 [ext_resource type="PackedScene" uid="uid://bx1vqr61hxiud" path="res://scenes/towers/ancient_rune.tscn" id="10_g0vx4"]
+[ext_resource type="Texture2D" uid="uid://clvwe7fr4375g" path="res://assets/sprite/circle.png" id="11_1h5x2"]
 [ext_resource type="PackedScene" uid="uid://ciuc3tgoya0dc" path="res://scenes/props/tree.tscn" id="11_ak5ky"]
 [ext_resource type="PackedScene" uid="uid://bsxfuuybvoh4r" path="res://scenes/props/rock.tscn" id="12_23uux"]
 
@@ -494,8 +497,14 @@ sources/2 = SubResource("TileSetAtlasSource_iw7uc")
 sources/3 = SubResource("TileSetAtlasSource_i2vdn")
 sources/4 = SubResource("TileSetAtlasSource_5l0hq")
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_muoms"]
+radius = 40.0
+
 [node name="Level" type="Node2D"]
 y_sort_enabled = true
+script = ExtResource("1_o7g5c")
+max_wood = 10
+max_rock = 10
 
 [node name="forest" type="TileMap" parent="."]
 y_sort_enabled = true
@@ -554,9 +563,12 @@ layer_7/y_sort_origin = 0
 layer_7/z_index = 1
 layer_7/tile_data = PackedInt32Array()
 
+[node name="GameUI" parent="." instance=ExtResource("7_yxqgu")]
+
 [node name="Player" parent="." instance=ExtResource("6_uhmqd")]
 position = Vector2(2412, 1864)
 tags = ["enemy"]
+invincible = true
 metadata/_edit_group_ = true
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
@@ -568,6 +580,16 @@ script = ExtResource("7_dfp3h")
 modulate = Color(1, 1, 1, 0.501961)
 position = Vector2(60, 0)
 texture = ExtResource("8_yj4sm")
+
+[node name="RadiusIndicator" type="Sprite2D" parent="Player/TowerPlacement/Tower"]
+self_modulate = Color(0.392157, 1, 1, 0.333333)
+z_index = -1
+texture = ExtResource("11_1h5x2")
+
+[node name="CollisionArea" type="Area2D" parent="Player/TowerPlacement/Tower"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/TowerPlacement/Tower/CollisionArea"]
+shape = SubResource("CircleShape2D_muoms")
 
 [node name="MainTower" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -592,3 +614,5 @@ position = Vector2(3016, 1873)
 
 [node name="Rock" parent="." instance=ExtResource("12_23uux")]
 position = Vector2(2972.82, 1961.5)
+
+[connection signal="resource_updated" from="." to="GameUI" method="_on_level_resource_updated"]

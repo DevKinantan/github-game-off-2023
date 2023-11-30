@@ -7,7 +7,6 @@
 radius = 5.0
 
 [node name="Projectile" type="CharacterBody2D"]
-z_index = 2
 script = ExtResource("1_k5umu")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

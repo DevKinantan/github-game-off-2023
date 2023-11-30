@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://2cmr8321wh8y"]
+[gd_scene load_steps=14 format=3 uid="uid://2cmr8321wh8y"]
 
 [ext_resource type="Script" path="res://scripts/class/Tower.gd" id="1_ymjsl"]
 [ext_resource type="Texture2D" uid="uid://clvwe7fr4375g" path="res://assets/sprite/circle.png" id="2_pelej"]
 [ext_resource type="Texture2D" uid="uid://ddpbfqcm7xw17" path="res://assets/sprite/tower/PillarMain.png" id="3_ctvdn"]
+[ext_resource type="Texture2D" uid="uid://cmrxu2l5xt10o" path="res://assets/sprite/BayanganTower.png" id="3_xe04p"]
 [ext_resource type="Texture2D" uid="uid://b7qxscgbu3emo" path="res://assets/sprite/tower/BolaMain.png" id="4_1ylpj"]
 [ext_resource type="Texture2D" uid="uid://bwgkuhms8nx5c" path="res://assets/sprite/tower/HaloMain.png" id="5_tatgf"]
 
@@ -111,7 +112,8 @@ radius = 100.0
 z_index = 1
 input_pickable = true
 script = ExtResource("1_ymjsl")
-attack_radius = 200
+attack = 2
+attack_radius = 300
 projectile_source = Vector2(0, -115)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -122,7 +124,13 @@ libraries = {
 
 [node name="RadiusIndicator" type="Sprite2D" parent="."]
 self_modulate = Color(0.392157, 1, 1, 0.333333)
+z_index = -1
 texture = ExtResource("2_pelej")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.498039)
+texture = ExtResource("3_xe04p")
+offset = Vector2(0, -8)
 
 [node name="FocusLine" type="Sprite2D" parent="."]
 modulate = Color(100, 100, 97.66, 1)

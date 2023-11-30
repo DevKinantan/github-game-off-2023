@@ -12,17 +12,17 @@ height = 32.0
 size = Vector2(39, 50)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_a3eq7"]
-radius = 70.0
+radius = 100.0
 
 [node name="BasicTower" type="StaticBody2D"]
 z_index = 1
 y_sort_enabled = true
 input_pickable = true
 script = ExtResource("1_r2cly")
+attack_radius = 200
 
 [node name="RadiusIndicator" type="Sprite2D" parent="."]
 self_modulate = Color(0.392157, 1, 1, 0.333333)
-scale = Vector2(2, 2)
 texture = ExtResource("2_lqoum")
 
 [node name="FocusLine" type="Sprite2D" parent="."]

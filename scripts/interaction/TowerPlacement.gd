@@ -15,7 +15,7 @@ const TOWERS = [
 ]
 
 
-@export var max_distance = 100.0
+@export var max_distance = 200.0
 
 @onready var tower = $Tower
 
@@ -47,6 +47,7 @@ func _input(event):
 		tower.position = get_local_mouse_position()
 		
 		var valid_place = origin.distance_to(get_local_mouse_position()) <= max_distance
+		valid_place = valid_place and not $Tower/CollisionArea.has_overlapping_bodies()
 		tower.modulate = NORMAL_COLOR if valid_place else RED_COLOR
 		
 		if valid_place and event.is_action_pressed("interact"):

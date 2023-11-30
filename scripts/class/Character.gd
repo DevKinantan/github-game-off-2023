@@ -174,7 +174,12 @@ func unfollow_target(t:Node2D):
 
 
 func _on_hurtbox_area_entered(area):
-	if area.name == "Hitbox" and not invincible:
+	if area.name == "Hitbox":
+		if $TintEffect.is_playing():
+			$TintEffect.stop()
 		$TintEffect.play("Damaged")
-		if hp <= 0:
-			queue_free()
+		print("-", area.get_parent().attack, " hp")
+		if not invincible:
+			hp -= area.get_parent().attack
+			if hp <= 0:
+				queue_free()

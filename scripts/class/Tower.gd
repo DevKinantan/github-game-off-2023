@@ -3,8 +3,8 @@ class_name Tower extends StaticBody2D
 @export var can_attack:bool = true
 
 @export var max_hp:int = 10
-@export var damage:int = 1
-@export var rate_of_fire:int = 1
+@export var attack:int = 1
+@export var attack_cooldown:float = 1.0
 @export var attack_radius:int = 100
 
 @export var projectile_source:Vector2 = Vector2.ZERO
@@ -22,7 +22,7 @@ func _ready():
 	set_attack_radius(attack_radius)
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if can_attack:
 		shoot_target()
 
@@ -57,14 +57,15 @@ func shoot_target():
 		var projectile = projectile_scn.instantiate()
 		var target_hurtbox = current_target.get_node("Hurtbox").global_position
 
-		get_parent().add_child(projectile)
-		projectile.global_position = to_global(projectile_source)
+		add_child(projectile)
+		projectile.set_origin_position(to_global(projectile_source))
+		projectile.attack = attack
 		projectile.velocity = projectile.global_position.direction_to(target_hurtbox) * 1000
 		can_shoot = false
-		$Cooldown.start()
+		$Cooldown.start(attack_cooldown)
 
 
-func _on_attack_area_body_entered(body):
+func _on_attack_area_body_entered(_body):
 	pass
 #	if body is Player:
 #		print("yay")
