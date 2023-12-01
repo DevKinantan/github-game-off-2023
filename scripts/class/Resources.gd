@@ -22,3 +22,13 @@ func _on_hurtbox_area_entered(area):
 		resource_stock -= 1
 		if resource_stock <= 0:
 			queue_free()
+
+
+func _on_interaction_area_body_entered(body):
+	if body is Player:
+		$InteractionArea.show_prompt(true, "Harvest")
+
+
+func _on_interaction_area_body_exited(body):
+	if body is Player:
+		$InteractionArea.show_prompt(false, "Harvest")

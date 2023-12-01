@@ -1,10 +1,18 @@
-[gd_scene load_steps=6 format=3 uid="uid://dk03trosymu10"]
+[gd_scene load_steps=14 format=3 uid="uid://dk03trosymu10"]
 
 [ext_resource type="Script" path="res://scripts/ui/GameUI.gd" id="1_jq6bd"]
 [ext_resource type="PackedScene" uid="uid://c2n7wwhulhg67" path="res://scenes/ui/resource_bar.tscn" id="2_v3mxo"]
 [ext_resource type="PackedScene" uid="uid://bt43xp3nu87v1" path="res://scenes/ui/tower_selector.tscn" id="3_jphav"]
 [ext_resource type="Texture2D" uid="uid://53niy0sjatlp" path="res://assets/ui/ui_setting.png" id="4_j7eir"]
+[ext_resource type="Texture2D" uid="uid://bb6nwlix55w30" path="res://assets/ui/button_e-export.png" id="4_rl408"]
 [ext_resource type="FontFile" uid="uid://dyolax51351il" path="res://assets/font/PixelifySans-VariableFont_wght.ttf" id="5_gbsmk"]
+[ext_resource type="Texture2D" uid="uid://b2kmpvpm02mdl" path="res://assets/ui/button_w.png" id="6_rf33x"]
+[ext_resource type="Texture2D" uid="uid://dpdrbrl3iie0h" path="res://assets/ui/button_a.png" id="7_8dvft"]
+[ext_resource type="Texture2D" uid="uid://ctc5c2uf6p73d" path="res://assets/ui/button_f-export.png" id="7_rgbct"]
+[ext_resource type="Texture2D" uid="uid://5tb57mffeico" path="res://assets/ui/button_s.png" id="8_pkg5l"]
+[ext_resource type="Texture2D" uid="uid://vplb32xb4hfi" path="res://assets/ui/button_d.png" id="9_rhaiq"]
+[ext_resource type="Texture2D" uid="uid://dbf6xyafin8g2" path="res://assets/ui/scroll_wheel2.png" id="10_qfp0c"]
+[ext_resource type="Texture2D" uid="uid://b0jktqxmvx0sy" path="res://assets/ui/klikkanan2-export.png" id="13_tmhxa"]
 
 [node name="GameUI" type="CanvasLayer"]
 script = ExtResource("1_jq6bd")
@@ -12,6 +20,82 @@ script = ExtResource("1_jq6bd")
 [node name="ResourceBar" parent="." instance=ExtResource("2_v3mxo")]
 
 [node name="TowerSelector" parent="." instance=ExtResource("3_jphav")]
+
+[node name="Panel" type="Panel" parent="TowerSelector"]
+z_index = -1
+layout_mode = 0
+offset_left = 75.0
+offset_top = 245.0
+offset_right = 299.0
+offset_bottom = 285.0
+
+[node name="ToggleButton" type="TextureRect" parent="TowerSelector"]
+layout_mode = 0
+offset_left = 75.0
+offset_top = 245.0
+offset_right = 103.0
+offset_bottom = 277.0
+texture = ExtResource("4_rl408")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="TowerSelector/ToggleButton"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 5.0
+offset_right = 71.0
+offset_bottom = 28.0
+theme_override_fonts/font = ExtResource("5_gbsmk")
+theme_override_font_sizes/font_size = 15
+text = "Toggle"
+
+[node name="CycleButton" type="TextureRect" parent="TowerSelector"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.362
+anchor_right = 0.362
+offset_left = -73.68
+offset_top = 250.0
+offset_right = -56.68
+offset_bottom = 268.0
+texture = ExtResource("10_qfp0c")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="TowerSelector/CycleButton"]
+layout_mode = 0
+offset_left = 19.0
+offset_right = 66.0
+offset_bottom = 22.0
+theme_override_fonts/font = ExtResource("5_gbsmk")
+theme_override_font_sizes/font_size = 15
+text = "Cycle"
+
+[node name="BuildButton" type="TextureRect" parent="TowerSelector"]
+layout_direction = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.347
+anchor_top = 0.681
+anchor_right = 0.347
+anchor_bottom = 0.681
+offset_left = -0.0800018
+offset_top = -0.160019
+offset_right = 27.92
+offset_bottom = 31.84
+texture = ExtResource("7_rgbct")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="TowerSelector/BuildButton"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 5.0
+offset_right = 71.0
+offset_bottom = 28.0
+theme_override_fonts/font = ExtResource("5_gbsmk")
+theme_override_font_sizes/font_size = 15
+text = "Build"
 
 [node name="Pause" type="Control" parent="."]
 layout_mode = 3
@@ -22,12 +106,13 @@ offset_bottom = 40.0
 [node name="PauseIcon" type="TextureRect" parent="Pause"]
 layout_mode = 0
 offset_left = 590.0
-offset_top = 19.0
+offset_top = 10.0
 offset_right = 630.0
-offset_bottom = 59.0
+offset_bottom = 50.0
 texture = ExtResource("4_j7eir")
 
 [node name="Exp" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -49,3 +134,98 @@ theme_override_font_sizes/font_size = 10
 text = "lv 1"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Guide" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Panel" type="Panel" parent="Guide"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 11.45
+anchor_top = 7.6
+anchor_right = 11.45
+anchor_bottom = 7.6
+offset_left = -3.05176e-05
+offset_right = 162.0
+offset_bottom = 35.0
+
+[node name="Movement" type="Control" parent="Guide"]
+anchors_preset = 0
+offset_left = 458.0
+offset_top = 304.0
+offset_right = 498.0
+offset_bottom = 331.0
+scale = Vector2(1.2, 1.2)
+
+[node name="W" type="TextureRect" parent="Guide/Movement"]
+layout_mode = 0
+offset_left = 8.0
+offset_right = 40.0
+offset_bottom = 32.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_rf33x")
+stretch_mode = 4
+
+[node name="A" type="TextureRect" parent="Guide/Movement"]
+layout_mode = 0
+offset_top = 12.0
+offset_right = 32.0
+offset_bottom = 44.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("7_8dvft")
+stretch_mode = 4
+
+[node name="S" type="TextureRect" parent="Guide/Movement"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 12.0
+offset_right = 43.0
+offset_bottom = 44.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("8_pkg5l")
+stretch_mode = 4
+
+[node name="D" type="TextureRect" parent="Guide/Movement"]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 12.0
+offset_right = 54.0
+offset_bottom = 44.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("9_rhaiq")
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="Guide/Movement"]
+layout_mode = 0
+offset_left = 39.0
+offset_top = 6.0
+offset_right = 72.0
+offset_bottom = 28.0
+theme_override_fonts/font = ExtResource("5_gbsmk")
+theme_override_font_sizes/font_size = 14
+text = "Walk"
+
+[node name="CycleButton" type="TextureRect" parent="Guide"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.362
+anchor_right = 0.362
+offset_left = 539.52
+offset_top = 313.0
+offset_right = 556.52
+offset_bottom = 331.0
+texture = ExtResource("13_tmhxa")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="Guide/CycleButton"]
+layout_mode = 0
+offset_left = 19.0
+offset_right = 66.0
+offset_bottom = 22.0
+theme_override_fonts/font = ExtResource("5_gbsmk")
+theme_override_font_sizes/font_size = 15
+text = "Dash"

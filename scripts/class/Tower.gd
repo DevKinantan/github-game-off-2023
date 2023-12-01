@@ -1,5 +1,6 @@
 class_name Tower extends StaticBody2D
 
+@export var tags = []
 @export var can_attack:bool = true
 
 @export var max_hp:int = 10
@@ -13,6 +14,7 @@ var projectile_scn = preload("res://scenes/props/projectile.tscn")
 
 var can_shoot:bool = true
 var current_target:Character = null
+var hp = max_hp
 
 
 func _ready():
@@ -87,3 +89,16 @@ func _on_mouse_detector_mouse_entered():
 func _on_mouse_detector_mouse_exited():
 	$FocusLine.visible = false
 	$RadiusIndicator.visible = false
+
+
+func _on_hurtbox_area_entered(area):
+	if area.name == "Hitbox":
+		if area.get_parent() is Enemy:
+			hp -= area.get_parent().attack
+		
+		if hp <= 0:
+			queue_free()
+		
+		if $TintEffect.is_playing():
+			$TintEffect.stop()
+		$TintEffect.play("Damaged")

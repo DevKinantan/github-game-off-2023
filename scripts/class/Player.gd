@@ -38,7 +38,7 @@ func _input(event):
 		if event.is_action_pressed("dash") and direction != Vector2.ZERO:
 			dash_state()
 		
-		elif event.is_action_pressed("attack"):
+		if event.is_action_pressed("attack") and is_area_have_resource():
 			attack_state()
 
 	if event.is_action_released("dash"):
@@ -78,6 +78,14 @@ func dash_state():
 func dash_end():
 	direction = Vector2.ZERO
 	state = MOVE
+
+
+func is_area_have_resource():
+	for body in $ObserveArea.get_overlapping_bodies():
+		if body is Resources:
+			return true
+
+	return false
 
 
 func _on_observe_area_area_entered(area):

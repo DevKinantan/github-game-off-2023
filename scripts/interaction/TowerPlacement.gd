@@ -25,7 +25,7 @@ var towers = [
 		"rock": 3
 	},
 	{
-		"scene": load("res://scenes/towers/basic_tower.tscn"),
+		"scene": load("res://scenes/towers/area_tower.tscn"),
 		"sprite": load("res://assets/sprite/tower/TreeTower2.png"),
 		"hp": 10,
 		"atk": 1,
@@ -35,7 +35,7 @@ var towers = [
 		"rock": 4
 	},
 	{
-		"scene": load("res://scenes/towers/basic_tower.tscn"),
+		"scene": load("res://scenes/towers/buff_tower.tscn"),
 		"sprite": load("res://assets/sprite/tower/TreeTower3.png"),
 		"hp": 10,
 		"atk": 1,
@@ -45,10 +45,10 @@ var towers = [
 		"rock": 6
 	},
 	{
-		"scene": load("res://scenes/towers/basic_tower.tscn"),
+		"scene": load("res://scenes/towers/decoy_tower.tscn"),
 		"sprite": load("res://assets/sprite/tower/Palisade.png"),
 		"hp": 10,
-		"atk": 1,
+		"atk": 0,
 		"atk_spd": 1,
 		"radius": 100,
 		"wood": 10,
@@ -97,9 +97,13 @@ func toggle_tower_placement(is_on:bool):
 
 func place_tower(pos:Vector2):
 	var tower_node = towers[selected_tower]["scene"].instantiate()
+	tower_node.max_hp = towers[selected_tower]["hp"]
+	tower_node.attack = towers[selected_tower]["atk"]
+	tower_node.attack_cooldown = towers[selected_tower]["atk_spd"]
+	tower_node.attack_radius = towers[selected_tower]["radius"]
 	get_parent().get_parent().add_child(tower_node)
 	tower_node.global_position = pos
-	
+
 	emit_signal("tower_build", towers[selected_tower]["wood"], towers[selected_tower]["rock"])
 
 

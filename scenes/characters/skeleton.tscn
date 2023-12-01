@@ -1,0 +1,362 @@
+[gd_scene load_steps=22 format=3 uid="uid://dt8nmrkjlp2kx"]
+
+[ext_resource type="Script" path="res://scripts/class/Enemy.gd" id="1_n2oes"]
+[ext_resource type="Texture2D" uid="uid://cejndbi80lv15" path="res://assets/animation/skeleton/skeleton_walk.png" id="2_tnm2k"]
+[ext_resource type="Texture2D" uid="uid://b0s2onemgshu1" path="res://assets/animation/skeleton/skeleton_atk.png" id="3_mbje8"]
+[ext_resource type="Texture2D" uid="uid://4ws6k4dvd4xm" path="res://assets/animation/skeleton/skeleton_ded.png" id="4_uuebx"]
+[ext_resource type="PackedScene" uid="uid://ltlvlsm1w0ha" path="res://scenes/ui/interaction_area.tscn" id="5_v3bad"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yf80d"]
+radius = 3.0
+height = 18.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_288ne"]
+radius = 26.0085
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sus8q"]
+radius = 100.0
+
+[sub_resource type="Animation" id="Animation_2n3pb"]
+resource_name = "Attack"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/Attack:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hitbox/CollisionShape2D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.3, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_f67qs"]
+resource_name = "Damaged"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(10, 1, 1, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_dnott"]
+resource_name = "Dead"
+length = 0.35
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/Dead:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.35),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"dead_end"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_ml6o7"]
+resource_name = "Idle"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/Idle:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 0, 0, 0]
+}
+
+[sub_resource type="Animation" id="Animation_6vmu3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/Idle:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprites/Walk:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprites:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprites/Attack:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Hitbox/CollisionShape2D:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sprites/Dead:frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_dgsnj"]
+resource_name = "Walk"
+length = 0.9
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/Walk:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4oa33"]
+_data = {
+"Attack": SubResource("Animation_2n3pb"),
+"Damaged": SubResource("Animation_f67qs"),
+"Dead": SubResource("Animation_dnott"),
+"Idle": SubResource("Animation_ml6o7"),
+"RESET": SubResource("Animation_6vmu3"),
+"Walk": SubResource("Animation_dgsnj")
+}
+
+[sub_resource type="Animation" id="Animation_q6o76"]
+resource_name = "Damaged"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(10, 1, 1, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_u5rsn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qwwvq"]
+_data = {
+"Damaged": SubResource("Animation_q6o76"),
+"RESET": SubResource("Animation_u5rsn")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nodk3"]
+radius = 13.0
+height = 38.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ffoi3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6w1bs"]
+radius = 26.0768
+
+[node name="Skeleton" type="CharacterBody2D"]
+z_index = 1
+y_sort_enabled = true
+scale = Vector2(1.5, 1.5)
+collision_mask = 0
+motion_mode = 1
+script = ExtResource("1_n2oes")
+tags = ["enemy"]
+default_speed = 50.0
+max_hp = 10
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_postprocessing = 1
+radius = 50.0
+max_speed = 50.0
+debug_enabled = true
+
+[node name="NavAgentTimer" type="Timer" parent="."]
+
+[node name="Sprites" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="Idle" type="Sprite2D" parent="Sprites"]
+visible = false
+position = Vector2(1, 0)
+texture = ExtResource("2_tnm2k")
+hframes = 9
+
+[node name="Walk" type="Sprite2D" parent="Sprites"]
+visible = false
+position = Vector2(1, 0)
+texture = ExtResource("2_tnm2k")
+hframes = 9
+
+[node name="Attack" type="Sprite2D" parent="Sprites"]
+texture = ExtResource("3_mbje8")
+hframes = 5
+
+[node name="Dead" type="Sprite2D" parent="Sprites"]
+visible = false
+texture = ExtResource("4_uuebx")
+hframes = 7
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_yf80d")
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+z_index = 1
+shape = SubResource("CircleShape2D_288ne")
+
+[node name="ChaseArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ChaseArea"]
+shape = SubResource("CircleShape2D_sus8q")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_4oa33")
+}
+
+[node name="TintEffect" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_qwwvq")
+}
+
+[node name="InteractionArea" parent="." instance=ExtResource("5_v3bad")]
+visible = false
+
+[node name="CollisionShape2D" parent="InteractionArea" index="0"]
+position = Vector2(0, 13)
+shape = SubResource("CapsuleShape2D_nodk3")
+
+[node name="Prompt" parent="InteractionArea" index="1"]
+position = Vector2(1, -25)
+
+[node name="Hurtbox" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("CapsuleShape2D_ffoi3")
+
+[node name="AttackArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+shape = SubResource("CircleShape2D_6w1bs")
+
+[node name="Cooldown" type="Timer" parent="."]
+one_shot = true
+
+[node name="RefreshTarget" type="Timer" parent="."]
+wait_time = 0.1
+autostart = true
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
+[connection signal="timeout" from="Cooldown" to="." method="_on_cooldown_timeout"]
+[connection signal="timeout" from="RefreshTarget" to="." method="_on_refresh_target_timeout"]
+
+[editable path="InteractionArea"]

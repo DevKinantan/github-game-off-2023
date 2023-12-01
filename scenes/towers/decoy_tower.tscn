@@ -1,9 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://drxoqibmd4kta"]
+[gd_scene load_steps=8 format=3 uid="uid://dsbwv33fsl3t6"]
 
-[ext_resource type="Script" path="res://scripts/class/Tower.gd" id="1_r2cly"]
-[ext_resource type="Texture2D" uid="uid://clvwe7fr4375g" path="res://assets/sprite/circle.png" id="2_lqoum"]
-[ext_resource type="Texture2D" uid="uid://mi4pwjfxbfou" path="res://assets/sprite/tower/TreeTower1.png" id="2_y7yxp"]
-[ext_resource type="Texture2D" uid="uid://cmrxu2l5xt10o" path="res://assets/sprite/BayanganTower.png" id="4_nneis"]
+[ext_resource type="Script" path="res://scripts/class/Tower.gd" id="1_b4j4a"]
+[ext_resource type="Texture2D" uid="uid://clvwe7fr4375g" path="res://assets/sprite/circle.png" id="2_vgt3e"]
+[ext_resource type="Texture2D" uid="uid://cmrxu2l5xt10o" path="res://assets/sprite/BayanganTower.png" id="4_itk5m"]
+[ext_resource type="Texture2D" uid="uid://bfbl3epys8ngp" path="res://assets/sprite/tower/Palisade.png" id="4_iynno"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_namor"]
 radius = 7.0
@@ -19,29 +19,29 @@ radius = 100.0
 z_index = 1
 y_sort_enabled = true
 input_pickable = true
-script = ExtResource("1_r2cly")
+script = ExtResource("1_b4j4a")
 attack_radius = 200
 
 [node name="RadiusIndicator" type="Sprite2D" parent="."]
 self_modulate = Color(0.392157, 1, 1, 0.333333)
-texture = ExtResource("2_lqoum")
+texture = ExtResource("2_vgt3e")
 
 [node name="FocusLine" type="Sprite2D" parent="."]
 visible = false
 modulate = Color(100, 100, 97.66, 1)
 position = Vector2(0, -13)
 scale = Vector2(1.05, 1.05)
-texture = ExtResource("2_y7yxp")
+texture = ExtResource("4_iynno")
 
 [node name="Shadow" type="Sprite2D" parent="."]
 self_modulate = Color(1, 1, 1, 0.498039)
 z_index = -1
 position = Vector2(0, 2)
-texture = ExtResource("4_nneis")
+texture = ExtResource("4_itk5m")
 offset = Vector2(0, -7)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_y7yxp")
+texture = ExtResource("4_iynno")
 offset = Vector2(0, -13)
 
 [node name="Collision" type="CollisionShape2D" parent="."]

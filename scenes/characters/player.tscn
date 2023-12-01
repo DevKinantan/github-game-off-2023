@@ -9,6 +9,10 @@
 [ext_resource type="Texture2D" uid="uid://cec4o76l7nty5" path="res://assets/animation/player/player_attack_part2.png" id="6_n3tsc"]
 [ext_resource type="Texture2D" uid="uid://ds2if8bqec0ov" path="res://assets/sprite/weapon/axe_tool.png" id="7_8kdf3"]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0crtq"]
+radius = 9.0
+height = 32.0
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_yf80d"]
 radius = 4.0
 height = 16.0
@@ -574,10 +578,6 @@ height = 38.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_ng7cj"]
 radius = 37.0
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0crtq"]
-radius = 8.0
-height = 26.0
-
 [node name="Player" type="CharacterBody2D"]
 z_index = 1
 collision_layer = 3
@@ -596,6 +596,12 @@ debug_enabled = true
 [node name="Shadow" type="Sprite2D" parent="."]
 texture = ExtResource("5_t2tx8")
 offset = Vector2(0, 4)
+
+[node name="Hurtbox" type="Area2D" parent="."]
+position = Vector2(0, -15)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("CapsuleShape2D_0crtq")
 
 [node name="Sprites" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -662,17 +668,9 @@ shape = SubResource("CapsuleShape2D_ccop2")
 disabled = true
 
 [node name="ObserveArea" type="Area2D" parent="."]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ObserveArea"]
 shape = SubResource("CircleShape2D_ng7cj")
 
-[node name="Hurtbox" type="Area2D" parent="."]
-position = Vector2(0, -15)
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
-shape = SubResource("CapsuleShape2D_0crtq")
-
-[connection signal="area_entered" from="ObserveArea" to="." method="_on_observe_area_area_entered"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
+[connection signal="area_entered" from="ObserveArea" to="." method="_on_observe_area_area_entered"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bx1vqr61hxiud"]
+[gd_scene load_steps=12 format=3 uid="uid://bx1vqr61hxiud"]
 
 [ext_resource type="Script" path="res://scripts/class/Tower.gd" id="1_igjub"]
 [ext_resource type="Texture2D" uid="uid://bu6tqtc2i2r13" path="res://assets/sprite/tower/TreeMainObjective.png" id="2_e733i"]
@@ -15,7 +15,48 @@ size = Vector2(93, 159)
 [sub_resource type="CircleShape2D" id="CircleShape2D_a3eq7"]
 radius = 100.0
 
-[node name="BasicTower" type="StaticBody2D"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0hooj"]
+radius = 24.0
+height = 96.0
+
+[sub_resource type="Animation" id="Animation_py0g0"]
+resource_name = "Damaged"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(5, 5, 5, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_q2o0j"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/path = NodePath("Sprite2D:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(5, 5, 5, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y0jgf"]
+_data = {
+"Damaged": SubResource("Animation_py0g0"),
+"RESET": SubResource("Animation_q2o0j")
+}
+
+[node name="AncientRune" type="StaticBody2D"]
 z_index = 1
 input_pickable = true
 script = ExtResource("1_igjub")
@@ -62,6 +103,13 @@ shape = SubResource("RectangleShape2D_gjp0d")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
 shape = SubResource("CircleShape2D_a3eq7")
 
+[node name="Hurtbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(-5, -6)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_0hooj")
+
 [node name="RefreshTarget" type="Timer" parent="."]
 wait_time = 0.1
 autostart = true
@@ -69,8 +117,14 @@ autostart = true
 [node name="Cooldown" type="Timer" parent="."]
 one_shot = true
 
+[node name="TintEffect" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_y0jgf")
+}
+
 [connection signal="mouse_entered" from="MouseDetector" to="." method="_on_mouse_detector_mouse_entered"]
 [connection signal="mouse_exited" from="MouseDetector" to="." method="_on_mouse_detector_mouse_exited"]
 [connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="timeout" from="RefreshTarget" to="." method="_on_refresh_target_timeout"]
 [connection signal="timeout" from="Cooldown" to="." method="_on_cooldown_timeout"]

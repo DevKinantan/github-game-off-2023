@@ -16,14 +16,14 @@ func _ready():
 
 
 func set_wood_stock(n:int):
-	if wood_stock < max_wood:
+	if ((n > 0) and (wood_stock < max_wood)) or ((n < 0) and (wood_stock > 0)):
 		wood_stock += n
 	emit_signal("resource_updated", wood_stock, max_wood, "wood")
 	emit_signal("resource_status", wood_stock, rock_stock)
 
 
 func set_rock_stock(n:int):
-	if rock_stock < max_rock:
+	if ((n > 0) and (rock_stock < max_rock)) or ((n < 0) and (rock_stock > 0)):
 		rock_stock += n
 	emit_signal("resource_updated", rock_stock, max_rock, "rock")
 	emit_signal("resource_status", wood_stock, rock_stock)

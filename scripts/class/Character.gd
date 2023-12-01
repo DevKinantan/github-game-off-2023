@@ -174,7 +174,7 @@ func unfollow_target(t:Node2D):
 
 
 func _on_hurtbox_area_entered(area):
-	if area.name == "Hitbox":
+	if area.name == "Hitbox" and area.get_parent() != self:
 		if $TintEffect.is_playing():
 			$TintEffect.stop()
 		$TintEffect.play("Damaged")
