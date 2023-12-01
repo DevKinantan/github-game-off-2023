@@ -61,6 +61,7 @@ z_index = 1
 input_pickable = true
 script = ExtResource("1_igjub")
 can_attack = false
+max_hp = 500
 attack_radius = 0
 
 [node name="RadiusIndicator" type="Sprite2D" parent="."]

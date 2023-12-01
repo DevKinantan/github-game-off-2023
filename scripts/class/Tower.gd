@@ -96,9 +96,9 @@ func _on_hurtbox_area_entered(area):
 		if area.get_parent() is Enemy:
 			hp -= area.get_parent().attack
 		
-		if hp <= 0:
-			queue_free()
+			if hp <= 0:
+				queue_free()
 		
-		if $TintEffect.is_playing():
-			$TintEffect.stop()
-		$TintEffect.play("Damaged")
+			if $TintEffect.is_playing():
+				$TintEffect.stop()
+			$TintEffect.play("Damaged")

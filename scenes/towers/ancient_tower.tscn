@@ -153,6 +153,7 @@ z_index = 1
 input_pickable = true
 script = ExtResource("1_ymjsl")
 tags = ["EnemyTarget"]
+max_hp = 250
 attack = 2
 attack_radius = 300
 projectile_source = Vector2(0, -115)

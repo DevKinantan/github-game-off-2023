@@ -7,16 +7,16 @@ enum {
 	DEAD
 }
 
+@export var target_queue = []
 @export var attack = 1
 
-var target_queue = []
 var atk_target = null
 var have_target = false
 
 func _ready():
 	state = MOVE_AND_ATTACK
-	target_queue.append(get_parent().get_node_or_null("MainTower/AncientTower4"))
-	target_queue.append(get_parent().get_node_or_null("MainTower/AncientRune"))
+#	target_queue.append(get_parent().get_node_or_null("MainTower/AncientTower4"))
+#	target_queue.append(get_parent().get_node_or_null("MainTower/AncientRune"))
 	atk_target = target_queue[0]
 
 
@@ -73,6 +73,7 @@ func move_and_attack_state(current_target=null):
 		$AnimationPlayer.play("Attack")
 		
 	elif current_target:
+		
 		direction = global_position.direction_to(current_target.get_node("Hurtbox").global_position)
 		velocity = speed * direction
 		if velocity != Vector2.ZERO:
