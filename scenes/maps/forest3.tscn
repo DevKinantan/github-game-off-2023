@@ -1,26 +1,26 @@
 [gd_scene load_steps=29 format=3 uid="uid://cbnj57ycw5lad"]
 
-[ext_resource type="Script" path="res://scripts/map/Forest.gd" id="1_i3ae2"]
-[ext_resource type="Texture2D" uid="uid://88wpftgvk7c5" path="res://assets/tileset/cliff.png" id="2_j2kuu"]
-[ext_resource type="Texture2D" uid="uid://wfwuv13vr570" path="res://assets/tileset/decor.png" id="3_d15xo"]
-[ext_resource type="Texture2D" uid="uid://chs8w67ork4f5" path="res://assets/tileset/grass.png" id="4_v6qoc"]
-[ext_resource type="Texture2D" uid="uid://d1prhbpo82314" path="res://assets/tileset/lake.png" id="5_gdc3f"]
-[ext_resource type="Texture2D" uid="uid://bhuo3qyfttatg" path="res://assets/tileset/trees1.png" id="6_7oncp"]
-[ext_resource type="Texture2D" uid="uid://dj1rbodgr0v72" path="res://assets/tileset/add.png" id="7_defx7"]
-[ext_resource type="PackedScene" uid="uid://dk03trosymu10" path="res://scenes/ui/game_ui.tscn" id="7_ru3q8"]
-[ext_resource type="PackedScene" uid="uid://dhi4opig7i2d8" path="res://scenes/characters/player.tscn" id="8_ah68u"]
-[ext_resource type="Texture2D" uid="uid://u36kvi054ktw" path="res://assets/tileset/path.png" id="8_i30pj"]
-[ext_resource type="Texture2D" uid="uid://bc5swrurvb66h" path="res://assets/tileset/tanah.png" id="9_5lb5y"]
-[ext_resource type="Script" path="res://scripts/interaction/TowerPlacement.gd" id="9_7j3eo"]
-[ext_resource type="Texture2D" uid="uid://mi4pwjfxbfou" path="res://assets/sprite/tower/TreeTower1.png" id="10_yb1tr"]
-[ext_resource type="Texture2D" uid="uid://clvwe7fr4375g" path="res://assets/sprite/circle.png" id="11_d3ksf"]
-[ext_resource type="PackedScene" uid="uid://2cmr8321wh8y" path="res://scenes/towers/ancient_tower.tscn" id="12_yfc6h"]
-[ext_resource type="PackedScene" uid="uid://bx1vqr61hxiud" path="res://scenes/towers/ancient_rune.tscn" id="13_tn044"]
-[ext_resource type="PackedScene" uid="uid://ciuc3tgoya0dc" path="res://scenes/props/tree.tscn" id="14_ral0j"]
-[ext_resource type="PackedScene" uid="uid://bsxfuuybvoh4r" path="res://scenes/props/rock.tscn" id="15_l6ccp"]
+[ext_resource type="Script" path="res://scripts/map/Forest.gd" id="1_70oop"]
+[ext_resource type="Texture2D" uid="uid://88wpftgvk7c5" path="res://assets/tileset/cliff.png" id="2_oqph0"]
+[ext_resource type="Texture2D" uid="uid://wfwuv13vr570" path="res://assets/tileset/decor.png" id="3_v3sq0"]
+[ext_resource type="Texture2D" uid="uid://chs8w67ork4f5" path="res://assets/tileset/grass.png" id="4_7evo4"]
+[ext_resource type="Texture2D" uid="uid://d1prhbpo82314" path="res://assets/tileset/lake.png" id="5_nnlha"]
+[ext_resource type="Texture2D" uid="uid://bhuo3qyfttatg" path="res://assets/tileset/trees1.png" id="6_npju7"]
+[ext_resource type="Texture2D" uid="uid://dj1rbodgr0v72" path="res://assets/tileset/add.png" id="7_rtrpi"]
+[ext_resource type="Texture2D" uid="uid://u36kvi054ktw" path="res://assets/tileset/path.png" id="8_0gheq"]
+[ext_resource type="Texture2D" uid="uid://bc5swrurvb66h" path="res://assets/tileset/tanah.png" id="9_53t1a"]
+[ext_resource type="PackedScene" uid="uid://dk03trosymu10" path="res://scenes/ui/game_ui.tscn" id="10_ad85i"]
+[ext_resource type="PackedScene" uid="uid://dhi4opig7i2d8" path="res://scenes/characters/player.tscn" id="11_wagui"]
+[ext_resource type="Script" path="res://scripts/interaction/TowerPlacement.gd" id="12_qd7f5"]
+[ext_resource type="Texture2D" uid="uid://mi4pwjfxbfou" path="res://assets/sprite/tower/TreeTower1.png" id="13_hm1xd"]
+[ext_resource type="Texture2D" uid="uid://clvwe7fr4375g" path="res://assets/sprite/circle.png" id="14_0rhwl"]
+[ext_resource type="PackedScene" uid="uid://2cmr8321wh8y" path="res://scenes/towers/ancient_tower.tscn" id="15_utueo"]
+[ext_resource type="PackedScene" uid="uid://bx1vqr61hxiud" path="res://scenes/towers/ancient_rune.tscn" id="16_r1rok"]
+[ext_resource type="PackedScene" uid="uid://ciuc3tgoya0dc" path="res://scenes/props/tree.tscn" id="17_66k2e"]
+[ext_resource type="PackedScene" uid="uid://bsxfuuybvoh4r" path="res://scenes/props/rock.tscn" id="18_rtfhq"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ndwgp"]
-texture = ExtResource("2_j2kuu")
+texture = ExtResource("2_oqph0")
 texture_region_size = Vector2i(32, 32)
 1:0/0 = 0
 1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
@@ -108,7 +108,7 @@ texture_region_size = Vector2i(32, 32)
 6:5/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ansj4"]
-texture = ExtResource("3_d15xo")
+texture = ExtResource("3_v3sq0")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
@@ -148,7 +148,7 @@ texture_region_size = Vector2i(32, 32)
 2:3/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iw7uc"]
-texture = ExtResource("4_v6qoc")
+texture = ExtResource("4_7evo4")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
@@ -272,7 +272,7 @@ texture_region_size = Vector2i(32, 32)
 0:7/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_i2vdn"]
-texture = ExtResource("5_gdc3f")
+texture = ExtResource("5_nnlha")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
@@ -438,7 +438,7 @@ texture_region_size = Vector2i(32, 32)
 8:6/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5l0hq"]
-texture = ExtResource("6_7oncp")
+texture = ExtResource("6_npju7")
 texture_region_size = Vector2i(32, 32)
 0:0/size_in_atlas = Vector2i(3, 5)
 0:0/0 = 0
@@ -499,7 +499,7 @@ texture_region_size = Vector2i(32, 32)
 3:10/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6.5, 65.25, 7.5, 65, 7.25, 58, -4.75, 57)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_scu66"]
-texture = ExtResource("7_defx7")
+texture = ExtResource("7_rtrpi")
 texture_region_size = Vector2i(32, 32)
 0:0/size_in_atlas = Vector2i(2, 2)
 0:0/0 = 0
@@ -519,7 +519,7 @@ texture_region_size = Vector2i(32, 32)
 0:2/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8hdid"]
-texture = ExtResource("8_i30pj")
+texture = ExtResource("8_0gheq")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
@@ -568,7 +568,7 @@ texture_region_size = Vector2i(32, 32)
 5:3/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_k5obp"]
-texture = ExtResource("9_5lb5y")
+texture = ExtResource("9_53t1a")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
@@ -654,7 +654,7 @@ radius = 40.0
 
 [node name="Level" type="Node2D"]
 y_sort_enabled = true
-script = ExtResource("1_i3ae2")
+script = ExtResource("1_70oop")
 max_wood = 10
 max_rock = 10
 
@@ -687,9 +687,9 @@ layer_7/name = "extra"
 layer_7/z_index = 1
 layer_7/tile_data = PackedInt32Array()
 
-[node name="GameUI" parent="." instance=ExtResource("7_ru3q8")]
+[node name="GameUI" parent="." instance=ExtResource("10_ad85i")]
 
-[node name="Player" parent="." instance=ExtResource("8_ah68u")]
+[node name="Player" parent="." instance=ExtResource("11_wagui")]
 position = Vector2(2412, 1864)
 tags = ["enemy"]
 invincible = true
@@ -698,17 +698,17 @@ metadata/_edit_group_ = true
 [node name="Camera2D" type="Camera2D" parent="Player"]
 
 [node name="TowerPlacement" type="Node2D" parent="Player"]
-script = ExtResource("9_7j3eo")
+script = ExtResource("12_qd7f5")
 
 [node name="Tower" type="Sprite2D" parent="Player/TowerPlacement"]
 modulate = Color(1, 1, 1, 0.501961)
 position = Vector2(60, 0)
-texture = ExtResource("10_yb1tr")
+texture = ExtResource("13_hm1xd")
 
 [node name="RadiusIndicator" type="Sprite2D" parent="Player/TowerPlacement/Tower"]
 self_modulate = Color(0.392157, 1, 1, 0.333333)
 z_index = -1
-texture = ExtResource("11_d3ksf")
+texture = ExtResource("14_0rhwl")
 
 [node name="CollisionArea" type="Area2D" parent="Player/TowerPlacement/Tower"]
 
@@ -719,24 +719,24 @@ shape = SubResource("CircleShape2D_muoms")
 y_sort_enabled = true
 position = Vector2(2700, 1600)
 
-[node name="AncientTower" parent="MainTower" instance=ExtResource("12_yfc6h")]
+[node name="AncientTower" parent="MainTower" instance=ExtResource("15_utueo")]
 position = Vector2(500, 0)
 
-[node name="AncientTower2" parent="MainTower" instance=ExtResource("12_yfc6h")]
+[node name="AncientTower2" parent="MainTower" instance=ExtResource("15_utueo")]
 position = Vector2(-500, 0)
 
-[node name="AncientTower3" parent="MainTower" instance=ExtResource("12_yfc6h")]
+[node name="AncientTower3" parent="MainTower" instance=ExtResource("15_utueo")]
 position = Vector2(0, -500)
 
-[node name="AncientTower4" parent="MainTower" instance=ExtResource("12_yfc6h")]
+[node name="AncientTower4" parent="MainTower" instance=ExtResource("15_utueo")]
 position = Vector2(0, 500)
 
-[node name="BasicTower" parent="MainTower" instance=ExtResource("13_tn044")]
+[node name="BasicTower" parent="MainTower" instance=ExtResource("16_r1rok")]
 
-[node name="Tree" parent="." instance=ExtResource("14_ral0j")]
+[node name="Tree" parent="." instance=ExtResource("17_66k2e")]
 position = Vector2(3016, 1873)
 
-[node name="Rock" parent="." instance=ExtResource("15_l6ccp")]
+[node name="Rock" parent="." instance=ExtResource("18_rtfhq")]
 position = Vector2(2972.82, 1961.5)
 
 [connection signal="resource_updated" from="." to="GameUI" method="_on_level_resource_updated"]
