@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://bt43xp3nu87v1"]
+[gd_scene load_steps=10 format=3 uid="uid://bt43xp3nu87v1"]
 
 [ext_resource type="Script" path="res://scripts/ui/TowerSelector.gd" id="1_56lu0"]
 [ext_resource type="Texture2D" uid="uid://q0cjrx35yi2" path="res://assets/ui/ui_slot_bar.png" id="1_cu3yx"]
 [ext_resource type="Texture2D" uid="uid://bj3dgd2wsor8n" path="res://assets/ui/ui_slot.png" id="2_0p4bv"]
 [ext_resource type="Texture2D" uid="uid://mi4pwjfxbfou" path="res://assets/sprite/tower/TreeTower1.png" id="3_1fewe"]
 [ext_resource type="FontFile" uid="uid://dyolax51351il" path="res://assets/font/PixelifySans-VariableFont_wght.ttf" id="4_7dy43"]
+[ext_resource type="Script" path="res://scripts/ui/Slot.gd" id="4_7e8bv"]
 [ext_resource type="Texture2D" uid="uid://dmge80ifw4k23" path="res://assets/sprite/tower/TreeTower2.png" id="4_hxw43"]
 [ext_resource type="Texture2D" uid="uid://b1q7vqnr4pqxy" path="res://assets/sprite/tower/TreeTower3.png" id="5_rrlda"]
 [ext_resource type="Texture2D" uid="uid://bfbl3epys8ngp" path="res://assets/sprite/tower/Palisade.png" id="6_jsgnk"]
@@ -27,13 +28,13 @@ offset_bottom = 345.0
 texture = ExtResource("1_cu3yx")
 
 [node name="Slot1" type="TextureButton" parent="BasePanel"]
-modulate = Color(0.333333, 0.784314, 1, 1)
 layout_mode = 0
 offset_left = 14.0
 offset_top = 15.0
 offset_right = 61.0
 offset_bottom = 62.0
 texture_normal = ExtResource("2_0p4bv")
+script = ExtResource("4_7e8bv")
 
 [node name="Icon" type="TextureRect" parent="BasePanel/Slot1"]
 layout_mode = 0
@@ -66,6 +67,7 @@ offset_right = 115.0
 offset_bottom = 62.0
 tooltip_text = "Lorem Ipsum Dolor Sit Amet Entah Aku Gak Tau Kelanjutan Katanya hhhhh hhhhh hhhhh hhhhh hhhhhh"
 texture_normal = ExtResource("2_0p4bv")
+script = ExtResource("4_7e8bv")
 
 [node name="Icon" type="TextureRect" parent="BasePanel/Slot2"]
 layout_mode = 0
@@ -97,6 +99,7 @@ offset_top = 15.0
 offset_right = 168.0
 offset_bottom = 62.0
 texture_normal = ExtResource("2_0p4bv")
+script = ExtResource("4_7e8bv")
 
 [node name="Icon" type="TextureRect" parent="BasePanel/Slot3"]
 layout_mode = 0
@@ -128,6 +131,7 @@ offset_top = 15.0
 offset_right = 221.0
 offset_bottom = 62.0
 texture_normal = ExtResource("2_0p4bv")
+script = ExtResource("4_7e8bv")
 
 [node name="Icon" type="TextureRect" parent="BasePanel/Slot4"]
 layout_mode = 0
@@ -152,7 +156,15 @@ text = "7/8"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[connection signal="mouse_entered" from="BasePanel/Slot1" to="BasePanel/Slot1" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="BasePanel/Slot1" to="BasePanel/Slot1" method="_on_mouse_exited"]
 [connection signal="pressed" from="BasePanel/Slot1" to="." method="_on_slot_1_pressed"]
+[connection signal="mouse_entered" from="BasePanel/Slot2" to="BasePanel/Slot2" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="BasePanel/Slot2" to="BasePanel/Slot2" method="_on_mouse_exited"]
 [connection signal="pressed" from="BasePanel/Slot2" to="." method="_on_slot_2_pressed"]
+[connection signal="mouse_entered" from="BasePanel/Slot3" to="BasePanel/Slot3" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="BasePanel/Slot3" to="BasePanel/Slot3" method="_on_mouse_exited"]
 [connection signal="pressed" from="BasePanel/Slot3" to="." method="_on_slot_3_pressed"]
+[connection signal="mouse_entered" from="BasePanel/Slot4" to="BasePanel/Slot4" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="BasePanel/Slot4" to="BasePanel/Slot4" method="_on_mouse_exited"]
 [connection signal="pressed" from="BasePanel/Slot4" to="." method="_on_slot_4_pressed"]

@@ -503,8 +503,6 @@ radius = 40.0
 [node name="Level" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_o7g5c")
-max_wood = 10
-max_rock = 10
 
 [node name="forest" type="TileMap" parent="."]
 y_sort_enabled = true
@@ -615,4 +613,10 @@ position = Vector2(3016, 1873)
 [node name="Rock" parent="." instance=ExtResource("12_23uux")]
 position = Vector2(2972.82, 1961.5)
 
+[connection signal="resource_status" from="." to="Player/TowerPlacement" method="_on_level_resource_status"]
 [connection signal="resource_updated" from="." to="GameUI" method="_on_level_resource_updated"]
+[connection signal="tower_selected" from="GameUI/TowerSelector" to="Player/TowerPlacement" method="_on_tower_selector_tower_selected"]
+[connection signal="tower_build" from="Player/TowerPlacement" to="." method="_on_tower_placement_tower_build"]
+[connection signal="towers_update" from="Player/TowerPlacement" to="GameUI/TowerSelector" method="_on_tower_placement_towers_update"]
+
+[editable path="GameUI"]

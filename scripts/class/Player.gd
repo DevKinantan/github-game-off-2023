@@ -40,8 +40,7 @@ func _input(event):
 		
 		elif event.is_action_pressed("attack"):
 			attack_state()
-		
-		
+
 	if event.is_action_released("dash"):
 		speed = default_speed
 

@@ -6,7 +6,7 @@ extends CharacterBody2D
 var origin_position = Vector2.ZERO
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	move_and_slide()
 	
 	if global_position.distance_to(origin_position) > max_distance:
