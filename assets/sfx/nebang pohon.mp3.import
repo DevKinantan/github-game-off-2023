@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b1vdpdmmf7kim"
+path="res://.godot/imported/nebang pohon.mp3-f399c3ad6b98536634e769d712c8f708.mp3str"
+
+[deps]
+
+source_file="res://assets/sfx/nebang pohon.mp3"
+dest_files=["res://.godot/imported/nebang pohon.mp3-f399c3ad6b98536634e769d712c8f708.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

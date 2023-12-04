@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dicbvsmfkl03y"
+path="res://.godot/imported/Walking Grass_1.mp3-4a66f0a898b13b8455e33bb3ac3c2afc.mp3str"
+
+[deps]
+
+source_file="res://assets/sfx/Walking Grass_1.mp3"
+dest_files=["res://.godot/imported/Walking Grass_1.mp3-4a66f0a898b13b8455e33bb3ac3c2afc.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

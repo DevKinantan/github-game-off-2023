@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://ciuc3tgoya0dc"]
+[gd_scene load_steps=13 format=3 uid="uid://ciuc3tgoya0dc"]
 
 [ext_resource type="Script" path="res://scripts/class/Resources.gd" id="1_fjcph"]
 [ext_resource type="Texture2D" uid="uid://c3h8dy04bd8ts" path="res://assets/sprite/MaterialPohon.png" id="1_kyyvf"]
 [ext_resource type="Texture2D" uid="uid://bkla884a7dqbo" path="res://assets/sprite/BayanganPohon.png" id="2_gtggc"]
 [ext_resource type="PackedScene" uid="uid://ltlvlsm1w0ha" path="res://scenes/ui/interaction_area.tscn" id="4_ytr5n"]
 [ext_resource type="Texture2D" uid="uid://bd7qcsx6tj8jd" path="res://assets/ui/klikkiri2-export.png" id="5_qujee"]
+[ext_resource type="AudioStream" uid="uid://b1vdpdmmf7kim" path="res://assets/sfx/nebang pohon.mp3" id="6_c0l62"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_olbei"]
 height = 32.0
@@ -101,6 +102,10 @@ offset_bottom = -55.484
 scale = Vector2(0.6, 0.6)
 theme_override_font_sizes/font_size = 30
 text = "Harvest"
+
+[node name="ResourceHit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_c0l62")
+max_distance = 100.0
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="body_entered" from="InteractionArea" to="." method="_on_interaction_area_body_entered"]

@@ -265,8 +265,9 @@ scale = Vector2(1.5, 1.5)
 collision_mask = 0
 motion_mode = 1
 script = ExtResource("1_n2oes")
+attack = 3
 tags = ["enemy"]
-default_speed = 50.0
+default_speed = 75.0
 max_hp = 10
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]

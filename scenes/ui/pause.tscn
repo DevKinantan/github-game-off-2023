@@ -1,0 +1,225 @@
+[gd_scene load_steps=10 format=3 uid="uid://bhkwrjsxjregs"]
+
+[ext_resource type="Script" path="res://scripts/ui/Pause.gd" id="1_40kaw"]
+[ext_resource type="Texture2D" uid="uid://53niy0sjatlp" path="res://assets/ui/ui_setting.png" id="2_fyfi7"]
+[ext_resource type="Texture2D" uid="uid://cedjj331kane2" path="res://assets/ui/ui_pause_bar.png" id="3_ywbqj"]
+[ext_resource type="Script" path="res://scripts/ui/Slot.gd" id="4_3qkaw"]
+[ext_resource type="FontFile" uid="uid://dyolax51351il" path="res://assets/font/PixelifySans-VariableFont_wght.ttf" id="4_wlq2s"]
+[ext_resource type="Texture2D" uid="uid://8waxf4scad7w" path="res://assets/ui/ui_pause_button.png" id="4_yamkq"]
+
+[sub_resource type="Animation" id="Animation_wdkht"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PauseButton:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_od032"]
+resource_name = "button_rotate"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PauseButton:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 3.14159]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rwups"]
+_data = {
+"RESET": SubResource("Animation_wdkht"),
+"button_rotate": SubResource("Animation_od032")
+}
+
+[node name="Pause" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_40kaw")
+
+[node name="PauseMenu" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="PauseBackground" type="Panel" parent="PauseMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="PauseMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -63.0
+offset_top = -92.5
+offset_right = 63.0
+offset_bottom = 60.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_ywbqj")
+
+[node name="Continue" type="TextureButton" parent="PauseMenu/TextureRect"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -45.0
+offset_top = -98.0
+offset_right = 45.0
+offset_bottom = -58.0
+grow_horizontal = 2
+grow_vertical = 0
+texture_normal = ExtResource("4_yamkq")
+script = ExtResource("4_3qkaw")
+
+[node name="Label" type="Label" parent="PauseMenu/TextureRect/Continue"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -36.0
+offset_right = 36.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_wlq2s")
+text = "CONTINUE"
+horizontal_alignment = 1
+
+[node name="Restart" type="TextureButton" parent="PauseMenu/TextureRect"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -45.0
+offset_top = -69.0
+offset_right = 45.0
+offset_bottom = -29.0
+grow_horizontal = 2
+grow_vertical = 0
+texture_normal = ExtResource("4_yamkq")
+script = ExtResource("4_3qkaw")
+
+[node name="Label" type="Label" parent="PauseMenu/TextureRect/Restart"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -36.0
+offset_right = 36.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_wlq2s")
+text = "RESTART"
+horizontal_alignment = 1
+
+[node name="ExitButton" type="TextureButton" parent="PauseMenu/TextureRect"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -45.0
+offset_top = -40.0
+offset_right = 45.0
+grow_horizontal = 2
+grow_vertical = 0
+texture_normal = ExtResource("4_yamkq")
+script = ExtResource("4_3qkaw")
+
+[node name="Label" type="Label" parent="PauseMenu/TextureRect/ExitButton"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -36.0
+offset_right = 36.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_wlq2s")
+text = "EXIT"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="PauseMenu/TextureRect"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -29.0
+offset_top = 16.0
+offset_right = 29.0
+offset_bottom = 44.0
+grow_horizontal = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("4_wlq2s")
+theme_override_font_sizes/font_size = 20
+text = "PAUSE"
+
+[node name="PauseButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 592.5
+offset_top = 10.279
+offset_right = 617.5
+offset_bottom = 35.279
+scale = Vector2(1.5, 1.517)
+pivot_offset = Vector2(13, 13)
+texture_normal = ExtResource("2_fyfi7")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_rwups")
+}
+
+[connection signal="mouse_entered" from="PauseMenu/TextureRect/Continue" to="PauseMenu/TextureRect/Continue" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="PauseMenu/TextureRect/Continue" to="PauseMenu/TextureRect/Continue" method="_on_mouse_exited"]
+[connection signal="pressed" from="PauseMenu/TextureRect/Continue" to="." method="_on_continue_pressed"]
+[connection signal="mouse_entered" from="PauseMenu/TextureRect/Restart" to="PauseMenu/TextureRect/Restart" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="PauseMenu/TextureRect/Restart" to="PauseMenu/TextureRect/Restart" method="_on_mouse_exited"]
+[connection signal="pressed" from="PauseMenu/TextureRect/Restart" to="." method="_on_restart_pressed"]
+[connection signal="mouse_entered" from="PauseMenu/TextureRect/ExitButton" to="PauseMenu/TextureRect/ExitButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="PauseMenu/TextureRect/ExitButton" to="PauseMenu/TextureRect/ExitButton" method="_on_mouse_exited"]
+[connection signal="pressed" from="PauseMenu/TextureRect/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="mouse_entered" from="PauseButton" to="." method="_on_pause_button_mouse_entered"]
+[connection signal="mouse_exited" from="PauseButton" to="." method="_on_pause_button_mouse_exited"]
+[connection signal="pressed" from="PauseButton" to="." method="_on_pause_button_pressed"]

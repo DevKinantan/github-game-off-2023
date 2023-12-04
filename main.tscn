@@ -1,7 +1,7 @@
 [gd_scene load_steps=2 format=3 uid="uid://c6e0tdxauoilo"]
 
-[ext_resource type="PackedScene" uid="uid://l8lhu14oigku" path="res://scenes/maps/forest.tscn" id="1_1p3wp"]
+[ext_resource type="PackedScene" uid="uid://cgv44xnm2ntun" path="res://scenes/ui/start_menu.tscn" id="1_kisjt"]
 
 [node name="Main" type="Node2D"]
 
-[node name="Level" parent="." instance=ExtResource("1_1p3wp")]
+[node name="StartMenu" parent="." instance=ExtResource("1_kisjt")]

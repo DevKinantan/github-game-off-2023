@@ -1,0 +1,376 @@
+[gd_scene load_steps=23 format=3 uid="uid://cgv44xnm2ntun"]
+
+[ext_resource type="Texture2D" uid="uid://c8qvw83rx81st" path="res://assets/wallpaper/animasi/frame1.png" id="1_3tavg"]
+[ext_resource type="Script" path="res://scripts/ui/StartMenu.gd" id="1_28v0r"]
+[ext_resource type="Texture2D" uid="uid://n5fe4vrsab0w" path="res://assets/ui/ui_button_start.png" id="2_nm6vd"]
+[ext_resource type="Texture2D" uid="uid://fch24rmpvkry" path="res://assets/wallpaper/animasi/frame2.png" id="2_rgdhn"]
+[ext_resource type="Texture2D" uid="uid://d2akjfq737jk" path="res://assets/ui/ui_button_start2.png" id="3_o43ix"]
+[ext_resource type="Texture2D" uid="uid://b8ptihj7x26wn" path="res://assets/wallpaper/animasi/frame3.png" id="3_xhp4a"]
+[ext_resource type="Texture2D" uid="uid://dye62705j35hb" path="res://assets/wallpaper/animasi/frame4.png" id="4_enyca"]
+[ext_resource type="Texture2D" uid="uid://ocgyoxg4ci0" path="res://assets/wallpaper/animasi/frame5.png" id="5_e14gb"]
+[ext_resource type="Texture2D" uid="uid://cedjj331kane2" path="res://assets/ui/ui_pause_bar.png" id="5_et4r4"]
+[ext_resource type="Script" path="res://scripts/ui/CreditScreen.gd" id="5_j6scc"]
+[ext_resource type="Texture2D" uid="uid://w1baitricciu" path="res://assets/wallpaper/animasi/frame6.png" id="6_ep5m7"]
+[ext_resource type="FontFile" uid="uid://dyolax51351il" path="res://assets/font/PixelifySans-VariableFont_wght.ttf" id="6_okx8j"]
+[ext_resource type="Texture2D" uid="uid://8waxf4scad7w" path="res://assets/ui/ui_pause_button.png" id="7_a7lfp"]
+[ext_resource type="Script" path="res://scripts/ui/Slot.gd" id="9_8gsgj"]
+[ext_resource type="AudioStream" uid="uid://ccw01b6txy6pl" path="res://assets/music/Playful_Trees.ogg" id="10_fpjtx"]
+
+[sub_resource type="Animation" id="Animation_l8g4s"]
+resource_name = "Background"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/Background:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("1_3tavg"), ExtResource("2_rgdhn"), ExtResource("3_xhp4a"), ExtResource("4_enyca"), ExtResource("5_e14gb"), ExtResource("6_ep5m7")]
+}
+
+[sub_resource type="Animation" id="Animation_lpva2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/Background:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("1_3tavg")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5ciok"]
+_data = {
+"Background": SubResource("Animation_l8g4s"),
+"RESET": SubResource("Animation_lpva2")
+}
+
+[sub_resource type="Animation" id="Animation_jtsm4"]
+resource_name = "FadeBlack"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"change_scene"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_jc36b"]
+resource_name = "FadeOut"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_kkxpk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7kw4o"]
+_data = {
+"FadeBlack": SubResource("Animation_jtsm4"),
+"FadeOut": SubResource("Animation_jc36b"),
+"RESET": SubResource("Animation_kkxpk")
+}
+
+[node name="StartMenu" type="CanvasLayer"]
+script = ExtResource("1_28v0r")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 2
+
+[node name="Background" type="TextureRect" parent="Control"]
+layout_mode = 0
+offset_right = 640.0
+offset_bottom = 360.0
+texture = ExtResource("1_3tavg")
+
+[node name="StartButton" type="TextureButton" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 186.5
+offset_top = 250.5
+offset_right = 413.5
+offset_bottom = 321.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 0
+texture_normal = ExtResource("2_nm6vd")
+texture_hover = ExtResource("3_o43ix")
+
+[node name="CreditScreen" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("5_j6scc")
+
+[node name="CreditPanel" type="Panel" parent="CreditScreen"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="CreditScreen/CreditPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -63.0
+offset_top = -76.5
+offset_right = 63.0
+offset_bottom = 76.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+pivot_offset = Vector2(62, 78)
+texture = ExtResource("5_et4r4")
+
+[node name="Label" type="Label" parent="CreditScreen/CreditPanel/TextureRect"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -57.0
+offset_top = 3.0
+offset_right = 57.0
+offset_bottom = 26.0
+grow_horizontal = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("6_okx8j")
+text = "Kinantan Team"
+horizontal_alignment = 1
+
+[node name="Artis" type="Control" parent="CreditScreen/CreditPanel/TextureRect/Label"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Artist" type="Label" parent="CreditScreen/CreditPanel/TextureRect/Label/Artis"]
+layout_mode = 0
+offset_left = 6.5
+offset_top = 26.75
+offset_right = 60.5
+offset_bottom = 42.75
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("6_okx8j")
+theme_override_font_sizes/font_size = 10
+text = "Artist"
+
+[node name="Adi" type="Label" parent="CreditScreen/CreditPanel/TextureRect/Label/Artis"]
+layout_mode = 0
+offset_left = 6.5
+offset_top = 38.75
+offset_right = 60.5
+offset_bottom = 54.75
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("6_okx8j")
+theme_override_font_sizes/font_size = 10
+text = "- Abdillah Syariaty"
+
+[node name="Adi2" type="Label" parent="CreditScreen/CreditPanel/TextureRect/Label/Artis"]
+layout_mode = 0
+offset_left = 6.5
+offset_top = 50.75
+offset_right = 60.5
+offset_bottom = 66.75
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("6_okx8j")
+theme_override_font_sizes/font_size = 10
+text = "- Alfi Syahrin"
+
+[node name="Adi3" type="Label" parent="CreditScreen/CreditPanel/TextureRect/Label/Artis"]
+layout_mode = 0
+offset_left = 6.5
+offset_top = 62.25
+offset_right = 60.5
+offset_bottom = 78.25
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("6_okx8j")
+theme_override_font_sizes/font_size = 10
+text = "- Farel Aziz Dinata"
+
+[node name="Artis" type="Control" parent="CreditScreen/CreditPanel/TextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.5
+offset_top = 56.0
+offset_right = -3.5
+offset_bottom = -46.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Artist" type="Label" parent="CreditScreen/CreditPanel/TextureRect/Artis"]
+layout_mode = 0
+offset_left = 6.5
+offset_top = 26.75
+offset_right = 60.5
+offset_bottom = 42.75
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("6_okx8j")
+theme_override_font_sizes/font_size = 10
+text = "Composer"
+
+[node name="Adi" type="Label" parent="CreditScreen/CreditPanel/TextureRect/Artis"]
+layout_mode = 0
+offset_left = 6.5
+offset_top = 38.75
+offset_right = 60.5
+offset_bottom = 54.75
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("6_okx8j")
+theme_override_font_sizes/font_size = 10
+text = "- Achmad Rifqy Zein"
+
+[node name="Artis2" type="Control" parent="CreditScreen/CreditPanel/TextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.5
+offset_top = 88.5
+offset_right = -3.5
+offset_bottom = -13.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Artist" type="Label" parent="CreditScreen/CreditPanel/TextureRect/Artis2"]
+layout_mode = 0
+offset_left = 6.5
+offset_top = 26.75
+offset_right = 60.5
+offset_bottom = 42.75
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("6_okx8j")
+theme_override_font_sizes/font_size = 10
+text = "Programmer"
+
+[node name="Adi" type="Label" parent="CreditScreen/CreditPanel/TextureRect/Artis2"]
+layout_mode = 0
+offset_left = 6.5
+offset_top = 38.75
+offset_right = 60.5
+offset_bottom = 54.75
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("6_okx8j")
+theme_override_font_sizes/font_size = 10
+text = "- Ichlalsul Bulqiah"
+
+[node name="CreditButton" type="TextureButton" parent="CreditScreen"]
+layout_mode = 0
+offset_left = 540.0
+offset_top = 10.0
+offset_right = 630.0
+offset_bottom = 50.0
+texture_normal = ExtResource("7_a7lfp")
+script = ExtResource("9_8gsgj")
+metadata/_edit_group_ = true
+
+[node name="Label" type="Label" parent="CreditScreen/CreditButton"]
+layout_mode = 0
+offset_right = 87.0
+offset_bottom = 26.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("6_okx8j")
+text = "CREDIT"
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Background"
+libraries = {
+"": SubResource("AnimationLibrary_5ciok")
+}
+
+[node name="TintPlayer" type="AnimationPlayer" parent="."]
+autoplay = "FadeOut"
+libraries = {
+"": SubResource("AnimationLibrary_7kw4o")
+}
+
+[node name="StartMenuMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_fpjtx")
+volume_db = -10.0
+autoplay = true
+
+[connection signal="pressed" from="Control/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="mouse_entered" from="CreditScreen/CreditButton" to="CreditScreen/CreditButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="CreditScreen/CreditButton" to="CreditScreen/CreditButton" method="_on_mouse_exited"]
+[connection signal="pressed" from="CreditScreen/CreditButton" to="CreditScreen" method="_on_credit_button_pressed"]

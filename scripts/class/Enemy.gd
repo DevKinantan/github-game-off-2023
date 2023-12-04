@@ -95,6 +95,8 @@ func _on_hurtbox_area_entered(area):
 			if hp <= 0:
 				tags = []
 				state = DEAD
+				direction = Vector2.ZERO
+				velocity = Vector2.ZERO
 				show_sprite("Dead")
 				$AnimationPlayer.play("Dead")
 

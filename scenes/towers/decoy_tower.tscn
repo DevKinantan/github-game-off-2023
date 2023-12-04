@@ -1,9 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://dsbwv33fsl3t6"]
+[gd_scene load_steps=18 format=3 uid="uid://dsbwv33fsl3t6"]
 
 [ext_resource type="Script" path="res://scripts/class/Tower.gd" id="1_b4j4a"]
 [ext_resource type="Texture2D" uid="uid://clvwe7fr4375g" path="res://assets/sprite/circle.png" id="2_vgt3e"]
 [ext_resource type="Texture2D" uid="uid://cmrxu2l5xt10o" path="res://assets/sprite/BayanganTower.png" id="4_itk5m"]
-[ext_resource type="Texture2D" uid="uid://bfbl3epys8ngp" path="res://assets/sprite/tower/Palisade.png" id="4_iynno"]
+[ext_resource type="Texture2D" uid="uid://ccn2i6f4b0xfw" path="res://assets/sprite/tower/palisadepisahan.png" id="5_u4ni4"]
+[ext_resource type="Texture2D" uid="uid://cbo0pfayc46cs" path="res://assets/sprite/tower/bolapalisade.png" id="6_ruqsu"]
+[ext_resource type="Texture2D" uid="uid://dovbj4a43lla3" path="res://assets/ui/ui_resource_bar.png" id="6_yotxe"]
+[ext_resource type="Texture2D" uid="uid://dmkdye33kf5rh" path="res://assets/ui/ui_resource_green.png" id="7_mx7hr"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_namor"]
 radius = 7.0
@@ -15,11 +18,212 @@ size = Vector2(39, 50)
 [sub_resource type="CircleShape2D" id="CircleShape2D_a3eq7"]
 radius = 100.0
 
-[node name="BasicTower" type="StaticBody2D"]
+[sub_resource type="Animation" id="Animation_v8ut2"]
+resource_name = "OrbMovement"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Orb/Orb1:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-18, -16), Vector2(19, -16), Vector2(-18, -16)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Orb/Orb1:z_index")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [-1, 0, -1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Orb/Orb1:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(2, 1, 1, 1), Color(1, 1, 1, 1), Color(2, 1, 1, 1), Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Orb/Orb2:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(19, -16), Vector2(-18, -16), Vector2(19, -16)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Orb/Orb2:z_index")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, -1, 0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Orb/Orb2:self_modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(2, 1, 1, 1), Color(1, 1, 1, 1), Color(2, 1, 1, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_u1kad"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Orb/Orb1:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-18, -16)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Orb/Orb1:z_index")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [-1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Orb/Orb1:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Orb/Orb2:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(19, -16)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Orb/Orb2:z_index")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [-1]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Orb/Orb2:self_modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wjpei"]
+_data = {
+"OrbMovement": SubResource("Animation_v8ut2"),
+"RESET": SubResource("Animation_u1kad")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aeq6c"]
+size = Vector2(39, 29)
+
+[sub_resource type="Animation" id="Animation_jyp4c"]
+resource_name = "Damaged"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(5, 5, 5, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_kvmiu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xfrhm"]
+_data = {
+"Damaged": SubResource("Animation_jyp4c"),
+"RESET": SubResource("Animation_kvmiu")
+}
+
+[node name="DecoyTower" type="StaticBody2D"]
 z_index = 1
 y_sort_enabled = true
 input_pickable = true
 script = ExtResource("1_b4j4a")
+can_attack = false
+is_decoy = true
+max_hp = 25
 attack_radius = 200
 
 [node name="RadiusIndicator" type="Sprite2D" parent="."]
@@ -31,18 +235,30 @@ visible = false
 modulate = Color(100, 100, 97.66, 1)
 position = Vector2(0, -13)
 scale = Vector2(1.05, 1.05)
-texture = ExtResource("4_iynno")
+texture = ExtResource("5_u4ni4")
 
 [node name="Shadow" type="Sprite2D" parent="."]
 self_modulate = Color(1, 1, 1, 0.498039)
 z_index = -1
 position = Vector2(0, 2)
 texture = ExtResource("4_itk5m")
-offset = Vector2(0, -7)
+offset = Vector2(0, -9)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("4_iynno")
+texture = ExtResource("5_u4ni4")
 offset = Vector2(0, -13)
+
+[node name="Orb" type="Node2D" parent="."]
+
+[node name="Orb1" type="Sprite2D" parent="Orb"]
+z_index = -1
+position = Vector2(-18, -16)
+texture = ExtResource("6_ruqsu")
+
+[node name="Orb2" type="Sprite2D" parent="Orb"]
+z_index = -1
+position = Vector2(19, -16)
+texture = ExtResource("6_ruqsu")
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2(0, 6)
@@ -69,8 +285,61 @@ autostart = true
 [node name="Cooldown" type="Timer" parent="."]
 one_shot = true
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "OrbMovement"
+libraries = {
+"": SubResource("AnimationLibrary_wjpei")
+}
+
+[node name="HealthBar" type="TextureRect" parent="."]
+offset_left = -20.0
+offset_top = 18.0
+offset_right = -9.0
+offset_bottom = 154.0
+rotation = -1.5708
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("6_yotxe")
+stretch_mode = 2
+metadata/_edit_group_ = true
+
+[node name="Bar" type="TextureRect" parent="HealthBar"]
+modulate = Color(0, 0, 2, 1)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 3.5
+offset_top = -2.0
+offset_right = 10.5
+offset_bottom = 130.0
+grow_horizontal = 2
+grow_vertical = 0
+rotation = 3.14159
+texture = ExtResource("7_mx7hr")
+expand_mode = 3
+stretch_mode = 1
+flip_h = true
+
+[node name="Hurtbox" type="Area2D" parent="."]
+
+[node name="Collision2D" type="CollisionShape2D" parent="Hurtbox"]
+light_mask = 4
+visibility_layer = 4
+position = Vector2(-0.5, -0.5)
+shape = SubResource("RectangleShape2D_aeq6c")
+
+[node name="TintEffect" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_xfrhm")
+}
+
 [connection signal="mouse_entered" from="MouseDetector" to="." method="_on_mouse_detector_mouse_entered"]
 [connection signal="mouse_exited" from="MouseDetector" to="." method="_on_mouse_detector_mouse_exited"]
 [connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
 [connection signal="timeout" from="RefreshTarget" to="." method="_on_refresh_target_timeout"]
 [connection signal="timeout" from="Cooldown" to="." method="_on_cooldown_timeout"]
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
+[connection signal="mouse_entered" from="Hurtbox" to="." method="_on_mouse_detector_mouse_entered"]
+[connection signal="mouse_exited" from="Hurtbox" to="." method="_on_mouse_detector_mouse_exited"]

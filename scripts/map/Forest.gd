@@ -13,6 +13,7 @@ var rock_stock:int = 6
 
 func _ready():
 	emit_signal("resource_status", wood_stock, rock_stock)
+#	get_tree().paused = true
 
 
 func set_wood_stock(n:int):

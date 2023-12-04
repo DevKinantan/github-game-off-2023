@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://2cmr8321wh8y"]
+[gd_scene load_steps=21 format=3 uid="uid://2cmr8321wh8y"]
 
 [ext_resource type="Script" path="res://scripts/class/Tower.gd" id="1_ymjsl"]
 [ext_resource type="Texture2D" uid="uid://clvwe7fr4375g" path="res://assets/sprite/circle.png" id="2_pelej"]
@@ -6,6 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://cmrxu2l5xt10o" path="res://assets/sprite/BayanganTower.png" id="3_xe04p"]
 [ext_resource type="Texture2D" uid="uid://b7qxscgbu3emo" path="res://assets/sprite/tower/BolaMain.png" id="4_1ylpj"]
 [ext_resource type="Texture2D" uid="uid://bwgkuhms8nx5c" path="res://assets/sprite/tower/HaloMain.png" id="5_tatgf"]
+[ext_resource type="Texture2D" uid="uid://dovbj4a43lla3" path="res://assets/ui/ui_resource_bar.png" id="7_mag7c"]
+[ext_resource type="Texture2D" uid="uid://dmkdye33kf5rh" path="res://assets/ui/ui_resource_green.png" id="8_3epre"]
+[ext_resource type="Texture2D" uid="uid://w167g4bkh4wo" path="res://assets/ui/up.png" id="9_3je62"]
 
 [sub_resource type="Animation" id="Animation_x1lur"]
 length = 0.001
@@ -153,7 +156,7 @@ z_index = 1
 input_pickable = true
 script = ExtResource("1_ymjsl")
 tags = ["EnemyTarget"]
-max_hp = 250
+max_hp = 100
 attack = 2
 attack_radius = 300
 projectile_source = Vector2(0, -115)
@@ -170,6 +173,7 @@ libraries = {
 }
 
 [node name="RadiusIndicator" type="Sprite2D" parent="."]
+visible = false
 self_modulate = Color(0.392157, 1, 1, 0.333333)
 z_index = -1
 texture = ExtResource("2_pelej")
@@ -210,6 +214,7 @@ position = Vector2(0, -47)
 shape = SubResource("RectangleShape2D_kj177")
 
 [node name="AttackArea" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
 shape = SubResource("CircleShape2D_a3eq7")
@@ -226,9 +231,45 @@ autostart = true
 [node name="Cooldown" type="Timer" parent="."]
 one_shot = true
 
+[node name="HealthBar" type="TextureRect" parent="."]
+offset_left = -20.0
+offset_top = 21.0
+offset_right = -9.0
+offset_bottom = 157.0
+rotation = -1.5708
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("7_mag7c")
+stretch_mode = 2
+metadata/_edit_group_ = true
+
+[node name="Bar" type="TextureRect" parent="HealthBar"]
+modulate = Color(0, 0, 2, 1)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 3.5
+offset_top = -2.0
+offset_right = 10.5
+offset_bottom = 130.0
+grow_horizontal = 2
+grow_vertical = 0
+rotation = 3.14159
+texture = ExtResource("8_3epre")
+expand_mode = 3
+stretch_mode = 1
+flip_h = true
+
+[node name="BuffIcon" type="Sprite2D" parent="."]
+position = Vector2(27, -29)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("9_3je62")
+
+[connection signal="area_entered" from="MouseDetector" to="." method="_on_mouse_detector_area_entered"]
 [connection signal="mouse_entered" from="MouseDetector" to="." method="_on_mouse_detector_mouse_entered"]
 [connection signal="mouse_exited" from="MouseDetector" to="." method="_on_mouse_detector_mouse_exited"]
-[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="timeout" from="RefreshTarget" to="." method="_on_refresh_target_timeout"]
 [connection signal="timeout" from="Cooldown" to="." method="_on_cooldown_timeout"]

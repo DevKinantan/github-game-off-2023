@@ -7,6 +7,7 @@ enum {
 }
 
 var tool = "axe"
+var attack = 0
 
 
 func _ready():
@@ -16,6 +17,7 @@ func _ready():
 
 
 func _physics_process(_delta):
+	
 	match state:
 		MOVE:
 			move_state()
@@ -38,7 +40,7 @@ func _input(event):
 		if event.is_action_pressed("dash") and direction != Vector2.ZERO:
 			dash_state()
 		
-		if event.is_action_pressed("attack") and is_area_have_resource():
+		elif event.is_action_pressed("attack") and is_area_have_resource():
 			attack_state()
 
 	if event.is_action_released("dash"):
@@ -60,6 +62,7 @@ func attack_state():
 	velocity = Vector2.ZERO
 	show_sprite("Attack")
 	var atk_animation = "AttackLeft" if is_flipped else "AttackRight"
+	if $AnimationPlayer.is_playing(): $AnimationPlayer.stop()
 	$AnimationPlayer.play(atk_animation)
 
 
@@ -69,7 +72,7 @@ func attack_end():
 
 func dash_state():
 	state = DASH
-#	speed *= 2.0
+	speed *= 2.0
 	velocity = direction * speed
 	show_sprite("Dash")
 	$AnimationPlayer.play("Dash")
@@ -77,6 +80,7 @@ func dash_state():
 
 func dash_end():
 	direction = Vector2.ZERO
+	speed = default_speed
 	state = MOVE
 
 

@@ -11,8 +11,7 @@ var ghoul = preload("res://scenes/characters/ghoul.tscn")
 var enemies = [slime, skeleton, ghoul]
 
 
-func _on_timer_timeout():
-	var idx = randi_range(0, 2)
+func spawn_enemy(idx):
 	var enemy_node = enemies[idx].instantiate()
 	
 	match tower:
@@ -29,3 +28,15 @@ func _on_timer_timeout():
 
 	get_parent().add_child(enemy_node)
 	enemy_node.global_position = global_position
+
+
+func _on_slime_spawn_timeout():
+	spawn_enemy(0)
+
+
+func _on_skeleton_spawn_timeout():
+	spawn_enemy(1)
+
+
+func _on_ghoul_spawn_timeout():
+	spawn_enemy(2)

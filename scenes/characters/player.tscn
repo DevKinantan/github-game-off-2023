@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dhi4opig7i2d8"]
+[gd_scene load_steps=25 format=3 uid="uid://dhi4opig7i2d8"]
 
 [ext_resource type="Script" path="res://scripts/class/Player.gd" id="1_d43cp"]
 [ext_resource type="Texture2D" uid="uid://cm7ou0sjwf33d" path="res://assets/animation/player/player_idle.png" id="2_f7ixp"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://0c2hqdt7eifb" path="res://assets/sprite/BayanganPlayer.png" id="5_t2tx8"]
 [ext_resource type="Texture2D" uid="uid://cec4o76l7nty5" path="res://assets/animation/player/player_attack_part2.png" id="6_n3tsc"]
 [ext_resource type="Texture2D" uid="uid://ds2if8bqec0ov" path="res://assets/sprite/weapon/axe_tool.png" id="7_8kdf3"]
+[ext_resource type="AudioStream" uid="uid://dicbvsmfkl03y" path="res://assets/sfx/Walking Grass_1.mp3" id="9_00h7x"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0crtq"]
 radius = 9.0
@@ -141,6 +142,18 @@ tracks/9/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [true, false, true]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Sprites/Attack/Weapon:visible")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
 }
 
 [sub_resource type="Animation" id="Animation_mrwca"]
@@ -279,6 +292,18 @@ tracks/10/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [0.0]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Sprites/Attack/Weapon:visible")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
 }
 
 [sub_resource type="Animation" id="Animation_n6afm"]
@@ -504,6 +529,18 @@ tracks/12/keys = {
 "update": 0,
 "values": [3.14159]
 }
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = false
+tracks/13/path = NodePath("Sprites/Attack/Weapon:visible")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_dgsnj"]
 resource_name = "Walk"
@@ -520,6 +557,23 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StepSound")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}, {
+"args": [0.0],
+"method": &"play"
+}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4oa33"]
@@ -594,6 +648,7 @@ debug_enabled = true
 [node name="NavAgentTimer" type="Timer" parent="."]
 
 [node name="Shadow" type="Sprite2D" parent="."]
+scale = Vector2(1.2, 1.2)
 texture = ExtResource("5_t2tx8")
 offset = Vector2(0, 4)
 
@@ -607,7 +662,6 @@ shape = SubResource("CapsuleShape2D_0crtq")
 y_sort_enabled = true
 
 [node name="Idle" type="Sprite2D" parent="Sprites"]
-visible = false
 texture = ExtResource("2_f7ixp")
 offset = Vector2(0, -20)
 hframes = 4
@@ -625,6 +679,7 @@ offset = Vector2(0, -20)
 hframes = 7
 
 [node name="Attack" type="Node2D" parent="Sprites"]
+visible = false
 
 [node name="AttackBody" type="Sprite2D" parent="Sprites/Attack"]
 texture = ExtResource("5_qr4ek")
@@ -671,6 +726,10 @@ disabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ObserveArea"]
 shape = SubResource("CircleShape2D_ng7cj")
+
+[node name="StepSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_00h7x")
+volume_db = -10.0
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="area_entered" from="ObserveArea" to="." method="_on_observe_area_area_entered"]

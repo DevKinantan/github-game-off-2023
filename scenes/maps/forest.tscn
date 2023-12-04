@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://l8lhu14oigku"]
+[gd_scene load_steps=50 format=3 uid="uid://l8lhu14oigku"]
 
 [ext_resource type="Texture2D" uid="uid://88wpftgvk7c5" path="res://assets/tileset/cliff.png" id="1_elrub"]
 [ext_resource type="Script" path="res://scripts/map/Forest.gd" id="1_o7g5c"]
@@ -18,8 +18,46 @@
 [ext_resource type="Texture2D" uid="uid://clvwe7fr4375g" path="res://assets/sprite/circle.png" id="11_1h5x2"]
 [ext_resource type="PackedScene" uid="uid://ciuc3tgoya0dc" path="res://scenes/props/tree.tscn" id="11_ak5ky"]
 [ext_resource type="PackedScene" uid="uid://bsxfuuybvoh4r" path="res://scenes/props/rock.tscn" id="12_23uux"]
+[ext_resource type="AudioStream" uid="uid://bc4jfxrj7m4r7" path="res://assets/sfx/Tower Build.mp3" id="15_fbvhg"]
 [ext_resource type="Script" path="res://scripts/map/ResourcePosition.gd" id="18_rj66d"]
 [ext_resource type="PackedScene" uid="uid://dnefnhvcuw6nk" path="res://scenes/props/spawner.tscn" id="20_6jcjw"]
+[ext_resource type="AudioStream" uid="uid://b4xyoy8qtys1s" path="res://assets/music/Willow.mp3" id="22_itydd"]
+
+[sub_resource type="Animation" id="Animation_mba6h"]
+resource_name = "FadeOut"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_l8vvv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xj1rq"]
+_data = {
+"FadeOut": SubResource("Animation_mba6h"),
+"RESET": SubResource("Animation_l8vvv")
+}
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ndwgp"]
 texture = ExtResource("1_elrub")
@@ -1685,11 +1723,20 @@ sources/6 = SubResource("TileSetAtlasSource_gmmb4")
 sources/7 = SubResource("TileSetAtlasSource_k5obp")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_muoms"]
-radius = 40.0
+radius = 30.0167
 
 [node name="Level" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_o7g5c")
+
+[node name="TintPlayer" type="AnimationPlayer" parent="."]
+process_mode = 3
+autoplay = "FadeOut"
+libraries = {
+"": SubResource("AnimationLibrary_xj1rq")
+}
+
+[node name="GameUI" parent="." instance=ExtResource("7_yxqgu")]
 
 [node name="forest" type="TileMap" parent="."]
 visible = false
@@ -1864,17 +1911,6 @@ layer_7/y_sort_origin = 0
 layer_7/z_index = 1
 layer_7/tile_data = PackedInt32Array()
 
-[node name="GameUI" parent="." instance=ExtResource("7_yxqgu")]
-
-[node name="BuildButton" parent="GameUI/TowerSelector" index="4"]
-offset_left = 0.0
-offset_top = 0.0
-offset_right = 28.0
-offset_bottom = 32.0
-
-[node name="Panel" parent="GameUI/Guide" index="0"]
-offset_left = 0.0
-
 [node name="Player" parent="." instance=ExtResource("6_uhmqd")]
 position = Vector2(2670, 1712)
 invincible = true
@@ -1899,6 +1935,10 @@ texture = ExtResource("11_1h5x2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player/TowerPlacement/Tower/CollisionArea"]
 shape = SubResource("CircleShape2D_muoms")
+
+[node name="TowerBuildAudio" type="AudioStreamPlayer2D" parent="Player/TowerPlacement"]
+stream = ExtResource("15_fbvhg")
+max_distance = 100.0
 
 [node name="MainTower" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -1938,6 +1978,9 @@ position = Vector2(3003, 1358)
 
 [node name="Marker2D4" type="Marker2D" parent="ResourcePosition"]
 position = Vector2(3166, 980)
+
+[node name="Marker2D48" type="Marker2D" parent="ResourcePosition"]
+position = Vector2(3013, 1112)
 
 [node name="Marker2D5" type="Marker2D" parent="ResourcePosition"]
 position = Vector2(3602, 950)
@@ -1999,11 +2042,20 @@ position = Vector2(2119, 2253)
 [node name="Marker2D20" type="Marker2D" parent="ResourcePosition"]
 position = Vector2(2197, 1951)
 
+[node name="Marker2D45" type="Marker2D" parent="ResourcePosition"]
+position = Vector2(2372, 1795)
+
+[node name="Marker2D46" type="Marker2D" parent="ResourcePosition"]
+position = Vector2(2057, 1452)
+
 [node name="Marker2D21" type="Marker2D" parent="ResourcePosition"]
 position = Vector2(2043, 2528)
 
 [node name="Marker2D22" type="Marker2D" parent="ResourcePosition"]
 position = Vector2(1718, 2389)
+
+[node name="Marker2D51" type="Marker2D" parent="ResourcePosition"]
+position = Vector2(1778, 2181)
 
 [node name="Marker2D38" type="Marker2D" parent="ResourcePosition"]
 position = Vector2(1588, 2567)
@@ -2041,8 +2093,14 @@ position = Vector2(2368, 650)
 [node name="Marker2D31" type="Marker2D" parent="ResourcePosition"]
 position = Vector2(1982, 935)
 
+[node name="Marker2D49" type="Marker2D" parent="ResourcePosition"]
+position = Vector2(2200, 771)
+
 [node name="Marker2D32" type="Marker2D" parent="ResourcePosition"]
 position = Vector2(2741, 724)
+
+[node name="Marker2D50" type="Marker2D" parent="ResourcePosition"]
+position = Vector2(3053, 823)
 
 [node name="Marker2D33" type="Marker2D" parent="ResourcePosition"]
 position = Vector2(3087, 654)
@@ -2058,6 +2116,9 @@ position = Vector2(3614, 1534)
 
 [node name="Marker2D37" type="Marker2D" parent="ResourcePosition"]
 position = Vector2(1719, 1481)
+
+[node name="Marker2D47" type="Marker2D" parent="ResourcePosition"]
+position = Vector2(1690, 1697)
 
 [node name="EnemySpawnPosition" type="Node2D" parent="."]
 
@@ -2098,7 +2159,6 @@ tower = 2
 [node name="Spawner7" parent="EnemySpawnPosition" instance=ExtResource("20_6jcjw")]
 position = Vector2(4500, 1000)
 rotation = 3.14159
-scale = Vector2(98.4546, 26.0024)
 target = [NodePath("../../MainTower/AncientTower3"), NodePath("../../MainTower/AncientRune")]
 
 [node name="Spawner9" parent="EnemySpawnPosition" instance=ExtResource("20_6jcjw")]
@@ -2116,10 +2176,16 @@ polygon = PackedVector2Array(2597, 526, 1608, 526, 1150, 822, 955, 1353, 976, 22
 [node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="CollisionBorder"]
 polygon = PackedVector2Array(2596, 526, 3759, 544, 4095, 909, 4233, 1166, 4261, 2239, 3959, 2592, 3295, 2813, 3282, 2922, 4021, 2692, 4359, 2259, 4350, 1189, 4197, 851, 3803, 442, 2604, 399)
 
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("22_itydd")
+volume_db = -10.0
+autoplay = true
+
 [connection signal="resource_status" from="." to="Player/TowerPlacement" method="_on_level_resource_status"]
 [connection signal="resource_updated" from="." to="GameUI" method="_on_level_resource_updated"]
-[connection signal="tower_selected" from="GameUI/TowerSelector" to="Player/TowerPlacement" method="_on_tower_selector_tower_selected"]
+[connection signal="tower_selected" from="GameUI/GameplayUI/TowerSelector" to="Player/TowerPlacement" method="_on_tower_selector_tower_selected"]
 [connection signal="tower_build" from="Player/TowerPlacement" to="." method="_on_tower_placement_tower_build"]
-[connection signal="towers_update" from="Player/TowerPlacement" to="GameUI/TowerSelector" method="_on_tower_placement_towers_update"]
+[connection signal="towers_update" from="Player/TowerPlacement" to="GameUI/GameplayUI/TowerSelector" method="_on_tower_placement_towers_update"]
+[connection signal="tower_destroyed" from="MainTower/AncientRune" to="GameUI" method="_on_ancient_rune_tower_destroyed"]
 
 [editable path="GameUI"]

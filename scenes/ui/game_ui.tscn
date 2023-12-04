@@ -1,27 +1,47 @@
-[gd_scene load_steps=14 format=3 uid="uid://dk03trosymu10"]
+[gd_scene load_steps=24 format=3 uid="uid://dk03trosymu10"]
 
 [ext_resource type="Script" path="res://scripts/ui/GameUI.gd" id="1_jq6bd"]
 [ext_resource type="PackedScene" uid="uid://c2n7wwhulhg67" path="res://scenes/ui/resource_bar.tscn" id="2_v3mxo"]
 [ext_resource type="PackedScene" uid="uid://bt43xp3nu87v1" path="res://scenes/ui/tower_selector.tscn" id="3_jphav"]
-[ext_resource type="Texture2D" uid="uid://53niy0sjatlp" path="res://assets/ui/ui_setting.png" id="4_j7eir"]
 [ext_resource type="Texture2D" uid="uid://bb6nwlix55w30" path="res://assets/ui/button_e-export.png" id="4_rl408"]
 [ext_resource type="FontFile" uid="uid://dyolax51351il" path="res://assets/font/PixelifySans-VariableFont_wght.ttf" id="5_gbsmk"]
 [ext_resource type="Texture2D" uid="uid://b2kmpvpm02mdl" path="res://assets/ui/button_w.png" id="6_rf33x"]
 [ext_resource type="Texture2D" uid="uid://dpdrbrl3iie0h" path="res://assets/ui/button_a.png" id="7_8dvft"]
 [ext_resource type="Texture2D" uid="uid://ctc5c2uf6p73d" path="res://assets/ui/button_f-export.png" id="7_rgbct"]
+[ext_resource type="PackedScene" uid="uid://bhkwrjsxjregs" path="res://scenes/ui/pause.tscn" id="8_hlkjq"]
 [ext_resource type="Texture2D" uid="uid://5tb57mffeico" path="res://assets/ui/button_s.png" id="8_pkg5l"]
 [ext_resource type="Texture2D" uid="uid://vplb32xb4hfi" path="res://assets/ui/button_d.png" id="9_rhaiq"]
 [ext_resource type="Texture2D" uid="uid://dbf6xyafin8g2" path="res://assets/ui/scroll_wheel2.png" id="10_qfp0c"]
 [ext_resource type="Texture2D" uid="uid://b0jktqxmvx0sy" path="res://assets/ui/klikkanan2-export.png" id="13_tmhxa"]
+[ext_resource type="Texture2D" uid="uid://yiulr1b2h44h" path="res://assets/ui/you lose.png" id="14_bpntf"]
+[ext_resource type="Texture2D" uid="uid://8waxf4scad7w" path="res://assets/ui/ui_pause_button.png" id="15_ffrkr"]
+[ext_resource type="Script" path="res://scripts/ui/TimerCountdown.gd" id="16_v3t6q"]
+[ext_resource type="Script" path="res://scripts/ui/Slot.gd" id="17_i2ivc"]
+[ext_resource type="Texture2D" uid="uid://cedjj331kane2" path="res://assets/ui/ui_pause_bar.png" id="18_i4eyc"]
+[ext_resource type="Script" path="res://scripts/ui/Guideline.gd" id="18_r2f78"]
+[ext_resource type="Texture2D" uid="uid://mi4pwjfxbfou" path="res://assets/sprite/tower/TreeTower1.png" id="19_p4nis"]
+[ext_resource type="Texture2D" uid="uid://b1q7vqnr4pqxy" path="res://assets/sprite/tower/TreeTower3.png" id="20_a0fq2"]
+[ext_resource type="Texture2D" uid="uid://dmge80ifw4k23" path="res://assets/sprite/tower/TreeTower2.png" id="21_nfen5"]
+[ext_resource type="Texture2D" uid="uid://bfbl3epys8ngp" path="res://assets/sprite/tower/Palisade.png" id="22_0x277"]
 
 [node name="GameUI" type="CanvasLayer"]
 script = ExtResource("1_jq6bd")
 
-[node name="ResourceBar" parent="." instance=ExtResource("2_v3mxo")]
+[node name="GameplayUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
-[node name="TowerSelector" parent="." instance=ExtResource("3_jphav")]
+[node name="ResourceBar" parent="GameplayUI" instance=ExtResource("2_v3mxo")]
 
-[node name="Panel" type="Panel" parent="TowerSelector"]
+[node name="TowerSelector" parent="GameplayUI" instance=ExtResource("3_jphav")]
+layout_mode = 1
+
+[node name="Panel" type="Panel" parent="GameplayUI/TowerSelector"]
 z_index = -1
 layout_mode = 0
 offset_left = 75.0
@@ -29,7 +49,7 @@ offset_top = 245.0
 offset_right = 299.0
 offset_bottom = 285.0
 
-[node name="ToggleButton" type="TextureRect" parent="TowerSelector"]
+[node name="ToggleButton" type="TextureRect" parent="GameplayUI/TowerSelector"]
 layout_mode = 0
 offset_left = 75.0
 offset_top = 245.0
@@ -39,7 +59,7 @@ texture = ExtResource("4_rl408")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="TowerSelector/ToggleButton"]
+[node name="Label" type="Label" parent="GameplayUI/TowerSelector/ToggleButton"]
 layout_mode = 0
 offset_left = 24.0
 offset_top = 5.0
@@ -49,20 +69,20 @@ theme_override_fonts/font = ExtResource("5_gbsmk")
 theme_override_font_sizes/font_size = 15
 text = "Toggle"
 
-[node name="CycleButton" type="TextureRect" parent="TowerSelector"]
+[node name="CycleButton" type="TextureRect" parent="GameplayUI/TowerSelector"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.362
 anchor_right = 0.362
-offset_left = -73.68
+offset_left = -72.48
 offset_top = 250.0
-offset_right = -56.68
+offset_right = -55.48
 offset_bottom = 268.0
 texture = ExtResource("10_qfp0c")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="TowerSelector/CycleButton"]
+[node name="Label" type="Label" parent="GameplayUI/TowerSelector/CycleButton"]
 layout_mode = 0
 offset_left = 19.0
 offset_right = 66.0
@@ -71,7 +91,7 @@ theme_override_fonts/font = ExtResource("5_gbsmk")
 theme_override_font_sizes/font_size = 15
 text = "Cycle"
 
-[node name="BuildButton" type="TextureRect" parent="TowerSelector"]
+[node name="BuildButton" type="TextureRect" parent="GameplayUI/TowerSelector"]
 layout_direction = 1
 layout_mode = 1
 anchors_preset = -1
@@ -79,15 +99,15 @@ anchor_left = 0.347
 anchor_top = 0.681
 anchor_right = 0.347
 anchor_bottom = 0.681
-offset_left = -0.0800018
-offset_top = -0.160019
-offset_right = 27.92
-offset_bottom = 31.84
+offset_left = 2.92
+offset_top = -0.160004
+offset_right = 30.92
+offset_bottom = 31.8401
 texture = ExtResource("7_rgbct")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="TowerSelector/BuildButton"]
+[node name="Label" type="Label" parent="GameplayUI/TowerSelector/BuildButton"]
 layout_mode = 0
 offset_left = 24.0
 offset_top = 5.0
@@ -97,33 +117,19 @@ theme_override_fonts/font = ExtResource("5_gbsmk")
 theme_override_font_sizes/font_size = 15
 text = "Build"
 
-[node name="Pause" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="PauseIcon" type="TextureRect" parent="Pause"]
-layout_mode = 0
-offset_left = 590.0
-offset_top = 10.0
-offset_right = 630.0
-offset_bottom = 50.0
-texture = ExtResource("4_j7eir")
-
-[node name="Exp" type="Control" parent="."]
+[node name="Exp" type="Control" parent="GameplayUI"]
 visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="ColorRect" type="ColorRect" parent="Exp"]
+[node name="ColorRect" type="ColorRect" parent="GameplayUI/Exp"]
 layout_mode = 0
 offset_right = 640.0
 offset_bottom = 9.0
 
-[node name="Label" type="Label" parent="Exp"]
+[node name="Label" type="Label" parent="GameplayUI/Exp"]
 layout_mode = 0
 offset_top = -3.0
 offset_right = 640.0
@@ -135,13 +141,13 @@ text = "lv 1"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Guide" type="Control" parent="."]
+[node name="Guide" type="Control" parent="GameplayUI"]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Panel" type="Panel" parent="Guide"]
+[node name="Panel" type="Panel" parent="GameplayUI/Guide"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 11.45
@@ -152,7 +158,7 @@ offset_left = -3.05176e-05
 offset_right = 162.0
 offset_bottom = 35.0
 
-[node name="Movement" type="Control" parent="Guide"]
+[node name="Movement" type="Control" parent="GameplayUI/Guide"]
 anchors_preset = 0
 offset_left = 458.0
 offset_top = 304.0
@@ -160,7 +166,7 @@ offset_right = 498.0
 offset_bottom = 331.0
 scale = Vector2(1.2, 1.2)
 
-[node name="W" type="TextureRect" parent="Guide/Movement"]
+[node name="W" type="TextureRect" parent="GameplayUI/Guide/Movement"]
 layout_mode = 0
 offset_left = 8.0
 offset_right = 40.0
@@ -169,7 +175,7 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("6_rf33x")
 stretch_mode = 4
 
-[node name="A" type="TextureRect" parent="Guide/Movement"]
+[node name="A" type="TextureRect" parent="GameplayUI/Guide/Movement"]
 layout_mode = 0
 offset_top = 12.0
 offset_right = 32.0
@@ -178,7 +184,7 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("7_8dvft")
 stretch_mode = 4
 
-[node name="S" type="TextureRect" parent="Guide/Movement"]
+[node name="S" type="TextureRect" parent="GameplayUI/Guide/Movement"]
 layout_mode = 0
 offset_left = 11.0
 offset_top = 12.0
@@ -188,7 +194,7 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("8_pkg5l")
 stretch_mode = 4
 
-[node name="D" type="TextureRect" parent="Guide/Movement"]
+[node name="D" type="TextureRect" parent="GameplayUI/Guide/Movement"]
 layout_mode = 0
 offset_left = 22.0
 offset_top = 12.0
@@ -198,7 +204,7 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("9_rhaiq")
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="Guide/Movement"]
+[node name="Label" type="Label" parent="GameplayUI/Guide/Movement"]
 layout_mode = 0
 offset_left = 39.0
 offset_top = 6.0
@@ -208,7 +214,7 @@ theme_override_fonts/font = ExtResource("5_gbsmk")
 theme_override_font_sizes/font_size = 14
 text = "Walk"
 
-[node name="CycleButton" type="TextureRect" parent="Guide"]
+[node name="CycleButton" type="TextureRect" parent="GameplayUI/Guide"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.362
@@ -221,7 +227,7 @@ texture = ExtResource("13_tmhxa")
 expand_mode = 1
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="Guide/CycleButton"]
+[node name="Label" type="Label" parent="GameplayUI/Guide/CycleButton"]
 layout_mode = 0
 offset_left = 19.0
 offset_right = 66.0
@@ -229,3 +235,298 @@ offset_bottom = 22.0
 theme_override_fonts/font = ExtResource("5_gbsmk")
 theme_override_font_sizes/font_size = 15
 text = "Dash"
+
+[node name="TimerCountdown" type="Label" parent="GameplayUI"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -126.0
+offset_top = 8.0
+offset_right = -60.0
+offset_bottom = 41.0
+grow_horizontal = 0
+size_flags_horizontal = 8
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("5_gbsmk")
+theme_override_font_sizes/font_size = 25
+text = "05:00"
+script = ExtResource("16_v3t6q")
+
+[node name="CountDown" type="Timer" parent="GameplayUI/TimerCountdown"]
+wait_time = 300.0
+one_shot = true
+
+[node name="LabelUpdate" type="Timer" parent="GameplayUI/TimerCountdown"]
+
+[node name="Pause" parent="GameplayUI" instance=ExtResource("8_hlkjq")]
+layout_mode = 1
+
+[node name="GameOver" type="Control" parent="."]
+process_mode = 3
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="BG" type="TextureRect" parent="GameOver"]
+layout_mode = 0
+offset_left = -0.999996
+offset_top = -1.0
+offset_right = 569.0
+offset_bottom = 249.0
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("14_bpntf")
+
+[node name="Restart" type="TextureButton" parent="GameOver"]
+layout_mode = 0
+offset_left = 341.0
+offset_top = 181.0
+offset_right = 431.0
+offset_bottom = 221.0
+texture_normal = ExtResource("15_ffrkr")
+script = ExtResource("17_i2ivc")
+
+[node name="Label" type="Label" parent="GameOver/Restart"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -36.0
+offset_right = 36.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("5_gbsmk")
+text = "RESTART"
+horizontal_alignment = 1
+
+[node name="Exit" type="TextureButton" parent="GameOver"]
+layout_mode = 0
+offset_left = 341.0
+offset_top = 211.0
+offset_right = 431.0
+offset_bottom = 251.0
+texture_normal = ExtResource("15_ffrkr")
+script = ExtResource("17_i2ivc")
+
+[node name="Label" type="Label" parent="GameOver/Exit"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -36.0
+offset_right = 36.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("5_gbsmk")
+text = "EXIT"
+horizontal_alignment = 1
+
+[node name="Guideline" type="Panel" parent="."]
+process_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("18_r2f78")
+
+[node name="Panel" type="TextureRect" parent="Guideline"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -63.0
+offset_top = -76.5
+offset_right = 63.0
+offset_bottom = 76.5
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 1.5708
+scale = Vector2(2, 3)
+pivot_offset = Vector2(63, 77)
+texture = ExtResource("18_i4eyc")
+
+[node name="OkButton" type="TextureButton" parent="Guideline/Panel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 37.0
+offset_top = -63.0
+offset_right = 127.0
+offset_bottom = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+rotation = -1.5708
+scale = Vector2(0.3, 0.5)
+texture_normal = ExtResource("15_ffrkr")
+script = ExtResource("17_i2ivc")
+
+[node name="Label" type="Label" parent="Guideline/Panel/OkButton"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -41.0
+offset_right = 41.0
+offset_bottom = 26.0
+grow_horizontal = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("5_gbsmk")
+text = "OK"
+horizontal_alignment = 1
+
+[node name="Tower1" type="TextureRect" parent="Guideline/Panel"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 143.0
+offset_right = 75.0
+offset_bottom = 183.0
+rotation = -1.5708
+texture = ExtResource("15_ffrkr")
+expand_mode = 1
+
+[node name="TextureRect" type="TextureRect" parent="Guideline/Panel/Tower1"]
+layout_mode = 0
+offset_left = 4.66667
+offset_top = 5.5
+offset_right = 24.6667
+offset_bottom = 28.5
+scale = Vector2(0.8, 1)
+texture = ExtResource("19_p4nis")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="Guideline/Panel/Tower1"]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 7.5
+offset_right = 115.0
+offset_bottom = 39.5
+scale = Vector2(0.42, 0.6)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("5_gbsmk")
+theme_override_font_sizes/font_size = 10
+text = "Shoot  1  Projectile
+to  Enemy"
+
+[node name="Tower2" type="TextureRect" parent="Guideline/Panel"]
+offset_left = 53.6667
+offset_top = 143.0
+offset_right = 118.667
+offset_bottom = 183.0
+rotation = -1.5708
+texture = ExtResource("15_ffrkr")
+expand_mode = 1
+
+[node name="TextureRect" type="TextureRect" parent="Guideline/Panel/Tower2"]
+offset_left = 4.66667
+offset_top = 5.5
+offset_right = 24.6667
+offset_bottom = 28.5
+scale = Vector2(0.8, 1)
+texture = ExtResource("20_a0fq2")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="Guideline/Panel/Tower2"]
+offset_left = 23.0
+offset_top = 7.5
+offset_right = 112.0
+offset_bottom = 39.5
+scale = Vector2(0.42, 0.6)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("5_gbsmk")
+theme_override_font_sizes/font_size = 10
+text = "Give  +1  ATK  to
+Nearest Towers"
+
+[node name="Tower3" type="TextureRect" parent="Guideline/Panel"]
+offset_left = 10.0
+offset_top = 73.0
+offset_right = 75.0
+offset_bottom = 113.0
+rotation = -1.5708
+texture = ExtResource("15_ffrkr")
+expand_mode = 1
+
+[node name="TextureRect" type="TextureRect" parent="Guideline/Panel/Tower3"]
+offset_left = 4.66667
+offset_top = 5.5
+offset_right = 24.6667
+offset_bottom = 28.5
+scale = Vector2(0.8, 1)
+texture = ExtResource("21_nfen5")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="Guideline/Panel/Tower3"]
+offset_left = 22.6667
+offset_top = 7.5
+offset_right = 111.667
+offset_bottom = 39.5
+scale = Vector2(0.42, 0.6)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("5_gbsmk")
+theme_override_font_sizes/font_size = 10
+text = "Deal  an  Area
+Damage  to  Enemy"
+
+[node name="Tower4" type="TextureRect" parent="Guideline/Panel"]
+offset_left = 54.0
+offset_top = 73.0
+offset_right = 119.0
+offset_bottom = 113.0
+rotation = -1.5708
+texture = ExtResource("15_ffrkr")
+expand_mode = 1
+
+[node name="TextureRect" type="TextureRect" parent="Guideline/Panel/Tower4"]
+offset_left = 4.66667
+offset_top = 5.5
+offset_right = 24.6667
+offset_bottom = 28.5
+scale = Vector2(0.8, 1)
+texture = ExtResource("22_0x277")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="Guideline/Panel/Tower4"]
+offset_left = 21.6667
+offset_top = 7.5
+offset_right = 116.667
+offset_bottom = 39.5
+scale = Vector2(0.42, 0.6)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("5_gbsmk")
+theme_override_font_sizes/font_size = 10
+text = "Lure  Enemies  to
+Attack  this  Tower"
+
+[connection signal="timeout" from="GameplayUI/TimerCountdown/CountDown" to="." method="_on_count_down_timeout"]
+[connection signal="timeout" from="GameplayUI/TimerCountdown/LabelUpdate" to="GameplayUI/TimerCountdown" method="_on_label_update_timeout"]
+[connection signal="mouse_entered" from="GameOver/Restart" to="GameOver/Restart" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="GameOver/Restart" to="GameOver/Restart" method="_on_mouse_exited"]
+[connection signal="pressed" from="GameOver/Restart" to="." method="_on_restart_pressed"]
+[connection signal="mouse_entered" from="GameOver/Exit" to="GameOver/Exit" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="GameOver/Exit" to="GameOver/Exit" method="_on_mouse_exited"]
+[connection signal="pressed" from="GameOver/Exit" to="." method="_on_exit_pressed"]
+[connection signal="mouse_entered" from="Guideline/Panel/OkButton" to="Guideline/Panel/OkButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Guideline/Panel/OkButton" to="Guideline/Panel/OkButton" method="_on_mouse_exited"]
+[connection signal="pressed" from="Guideline/Panel/OkButton" to="Guideline" method="_on_ok_button_pressed"]

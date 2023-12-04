@@ -12,6 +12,7 @@ enum RESOURCE {
 func _on_hurtbox_area_entered(area):
 	if area.name == "Hitbox" and area.get_parent() is Player:
 		$AnimationPlayer.play("Hit")
+		$ResourceHit.play()
 		
 		match resource_type:
 			RESOURCE.WOOD:

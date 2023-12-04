@@ -6,8 +6,18 @@
 position = Vector2(2699, 276)
 script = ExtResource("1_g3c6p")
 
-[node name="Timer" type="Timer" parent="."]
-wait_time = 30.0
+[node name="SlimeSpawn" type="Timer" parent="."]
+wait_time = 10.0
 autostart = true
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[node name="SkeletonSpawn" type="Timer" parent="."]
+wait_time = 20.0
+autostart = true
+
+[node name="GhoulSpawn" type="Timer" parent="."]
+wait_time = 35.0
+autostart = true
+
+[connection signal="timeout" from="SlimeSpawn" to="." method="_on_slime_spawn_timeout"]
+[connection signal="timeout" from="SkeletonSpawn" to="." method="_on_skeleton_spawn_timeout"]
+[connection signal="timeout" from="GhoulSpawn" to="." method="_on_ghoul_spawn_timeout"]

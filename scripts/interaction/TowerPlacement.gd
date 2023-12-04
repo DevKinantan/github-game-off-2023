@@ -21,7 +21,7 @@ var towers = [
 		"atk": 1,
 		"atk_spd": 1,
 		"radius": 200,
-		"wood": 3,
+		"wood": 4,
 		"rock": 3
 	},
 	{
@@ -31,7 +31,7 @@ var towers = [
 		"atk": 1,
 		"atk_spd": 1,
 		"radius": 100,
-		"wood": 4,
+		"wood": 3,
 		"rock": 4
 	},
 	{
@@ -41,8 +41,8 @@ var towers = [
 		"atk": 1,
 		"atk_spd": 1,
 		"radius": 200,
-		"wood": 3,
-		"rock": 6
+		"wood": 8,
+		"rock": 8
 	},
 	{
 		"scene": load("res://scenes/towers/decoy_tower.tscn"),
@@ -51,8 +51,8 @@ var towers = [
 		"atk": 0,
 		"atk_spd": 1,
 		"radius": 100,
-		"wood": 10,
-		"rock": 10
+		"wood": 6,
+		"rock": 6
 	},
 ]
 var towers_avaibility = [true, true, true, true]
@@ -103,6 +103,7 @@ func place_tower(pos:Vector2):
 	tower_node.attack_radius = towers[selected_tower]["radius"]
 	get_parent().get_parent().add_child(tower_node)
 	tower_node.global_position = pos
+	$TowerBuildAudio.play()
 
 	emit_signal("tower_build", towers[selected_tower]["wood"], towers[selected_tower]["rock"])
 

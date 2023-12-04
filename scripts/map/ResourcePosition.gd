@@ -14,7 +14,7 @@ func add_resources():
 		var scale_variant = randf_range(0.7, 1.3)
 		var is_rock = randi_range(0, 1)
 		var is_fliped = randi_range(0, 1)
-		var stock = randi_range(1, 5)
+		var stock = randi_range(3, 7)
 		var resource_node = rock_scene.instantiate() if is_rock else tree_scene.instantiate()
 		
 		get_parent().add_child.call_deferred(resource_node)

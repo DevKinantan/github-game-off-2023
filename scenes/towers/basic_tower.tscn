@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://drxoqibmd4kta"]
+[gd_scene load_steps=9 format=3 uid="uid://drxoqibmd4kta"]
 
 [ext_resource type="Script" path="res://scripts/class/Tower.gd" id="1_r2cly"]
 [ext_resource type="Texture2D" uid="uid://clvwe7fr4375g" path="res://assets/sprite/circle.png" id="2_lqoum"]
 [ext_resource type="Texture2D" uid="uid://mi4pwjfxbfou" path="res://assets/sprite/tower/TreeTower1.png" id="2_y7yxp"]
 [ext_resource type="Texture2D" uid="uid://cmrxu2l5xt10o" path="res://assets/sprite/BayanganTower.png" id="4_nneis"]
+[ext_resource type="Texture2D" uid="uid://w167g4bkh4wo" path="res://assets/ui/up.png" id="5_7eug0"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_namor"]
 radius = 7.0
@@ -27,7 +28,6 @@ self_modulate = Color(0.392157, 1, 1, 0.333333)
 texture = ExtResource("2_lqoum")
 
 [node name="FocusLine" type="Sprite2D" parent="."]
-visible = false
 modulate = Color(100, 100, 97.66, 1)
 position = Vector2(0, -13)
 scale = Vector2(1.05, 1.05)
@@ -69,8 +69,13 @@ autostart = true
 [node name="Cooldown" type="Timer" parent="."]
 one_shot = true
 
+[node name="BuffIcon" type="Sprite2D" parent="."]
+position = Vector2(27, -29)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("5_7eug0")
+
+[connection signal="area_entered" from="MouseDetector" to="." method="_on_mouse_detector_area_entered"]
 [connection signal="mouse_entered" from="MouseDetector" to="." method="_on_mouse_detector_mouse_entered"]
 [connection signal="mouse_exited" from="MouseDetector" to="." method="_on_mouse_detector_mouse_exited"]
-[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_body_entered"]
 [connection signal="timeout" from="RefreshTarget" to="." method="_on_refresh_target_timeout"]
 [connection signal="timeout" from="Cooldown" to="." method="_on_cooldown_timeout"]
